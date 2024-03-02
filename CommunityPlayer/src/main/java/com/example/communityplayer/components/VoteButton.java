@@ -1,19 +1,21 @@
-package com.example.communityplayer;
+package com.example.communityplayer.components;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Objects;
+
 /**
  * A custom button for voting actions.
  */
 public class VoteButton {
-    Button button = new Button();
-    boolean selected = false;
+    private final Button button = new Button();
+    private boolean selected = false;
 
-    ImageView mainImageView;
+    private final ImageView mainImageView;
 
-    ImageView secondaryImageView;
+    private final ImageView secondaryImageView;
 
     /**
      * Constructs a VoteButton with the given image paths.
@@ -22,11 +24,11 @@ public class VoteButton {
      * @param secondaryImagePath The path to the secondary image displayed on the button when selected.
      */
     public VoteButton(String imagePath, String secondaryImagePath) {
-        this.mainImageView = new ImageView(new Image(imagePath));
+        this.mainImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResource(imagePath)).toExternalForm()));
         mainImageView.setFitWidth(24);
         mainImageView.setFitHeight(24);
 
-        this.secondaryImageView = new ImageView(new Image(secondaryImagePath));
+        this.secondaryImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResource(secondaryImagePath)).toExternalForm()));
         secondaryImageView.setFitWidth(24);
         secondaryImageView.setFitHeight(24);
 

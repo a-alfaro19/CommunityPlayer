@@ -1,4 +1,4 @@
-package com.example.communityplayer;
+package com.example.communityplayer.components;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -24,19 +24,19 @@ public class InfoRec {
      */
     public InfoRec(double width, double height, String tag, String value) {
         Rectangle rectangle = new Rectangle(width, height);
-        rectangle.setFill(Color.web("#232323"));
-        rectangle.setArcWidth(20);
-        rectangle.setArcHeight(20);
+        rectangle.getStyleClass().add("rectangle");
 
         VBox albumNameBox = new VBox(15);
         Label albumNameTagLabel = new Label(tag);
-        albumNameTagLabel.setStyle("-fx-text-fill: white; -fx-underline: true;");
-        albumNameTagLabel.setFont(Font.loadFont(getClass().getResourceAsStream("Gotham-Font/GothamMedium.ttf"), 24));
+        albumNameTagLabel.getStyleClass().add("albumNameTagLabel");
+        albumNameTagLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/com/example/communityplayer/Gotham-Font/GothamMedium.ttf"), 24));
+
         Label albumNameLabel = new Label(value);
-        albumNameLabel.setStyle("-fx-text-fill: #C0C0C0;");
-        albumNameLabel.setFont(Font.loadFont(getClass().getResourceAsStream("Gotham-Font/GothamMedium.ttf"), 18));
+        albumNameLabel.getStyleClass().add("albumNameLabel");
+        albumNameLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/com/example/communityplayer/Gotham-Font/GothamMedium.ttf"), 18));
+
         albumNameBox.getChildren().addAll(albumNameTagLabel, albumNameLabel);
-        albumNameBox.setPadding(new Insets(15, 10, 15, 10));
+        albumNameBox.getStyleClass().add("albumNameBox");
 
         infoRec = new StackPane();
         infoRec.getChildren().addAll(rectangle, albumNameBox);

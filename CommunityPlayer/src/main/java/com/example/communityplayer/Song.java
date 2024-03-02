@@ -113,32 +113,21 @@ public class Song {
     public String getImagePath() { return imagePath; }
 
     /**
-     * Increases the total number of up votes by one.
+     * Sets the total number of up votes for the song.
+     *
+     * @param votes The new total number of up votes to set.
      */
-    public void addUpVote() {
-        totalUpVotes += 1;
+    public void setTotalUpVotes(int votes) {
+        totalUpVotes = votes;
     }
 
     /**
-     * Increases the total number of down votes by one.
+     * Sets the total number of down votes for the song.
+     *
+     * @param votes The new total number of down votes to set.
      */
-    public void addDownVote() {
-        totalDownVotes += 1;
+    public void setTotalDownVotes(int votes) {
+        totalDownVotes = votes;
     }
-
-    /**
-     * Reduces the total number of up votes by one.
-     */
-    public void reduceUpVote() {
-        totalUpVotes -= 1;
-    }
-
-    /**
-     * Reduces the total number of downvotes by one.
-     */
-    public void reduceDownVote() {
-        totalDownVotes -= 1;
-    }
-
 
 }

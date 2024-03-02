@@ -1,4 +1,4 @@
-package com.example.communityplayer;
+package com.example.communityplayer.components;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.Objects;
 
 /**
  * A custom class for displaying song images with rounded corners.
@@ -20,7 +22,7 @@ public class SongImage {
      * @param imagePath The path to the image file.
      */
     public SongImage(double size, String imagePath) {
-        Image songImage = new Image(imagePath);
+        Image songImage = new Image(Objects.requireNonNull(getClass().getResource(imagePath)).toExternalForm());
         image = new ImageView(songImage);
         image.setFitWidth(size);
         image.setFitHeight(size);

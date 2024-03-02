@@ -1,12 +1,19 @@
 package com.example.communityplayer;
 
-import javafx.geometry.Insets;
+import com.example.communityplayer.components.InfoRec;
+import com.example.communityplayer.components.SongImage;
+import com.example.communityplayer.components.VotesBox;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+
+import java.io.File;
+import java.io.IOException;
+
+import java.awt.Desktop;
 
 /**
  * Class representing the section for displaying song information.
@@ -22,60 +29,54 @@ public class SongInfoSection {
      * @param fatherPadding The padding of the parent container.
      */
     public SongInfoSection(Song song, double[] fatherSize, int fatherPadding) {
-//      Pane box params
+        // Fonts
+        String primaryFontPath = "Gotham-Font/Gotham-Bold.otf";
+        String buttonFontPath = "Gotham-Font/Gotham-Black.otf";
+
+        //  Pane box params
         double[] size = new double[]{fatherSize[0] * 0.25, fatherSize[1] - (2 * fatherPadding)};
         int paddingX = 20;
-        int paddingY = 25;
         double paneContentWidth = size[0] - (2 * paddingX);
 
-//      Pane
+        //  Pane
         pane = new VBox(20);
         pane.setPrefSize(size[0], size[1]);
-        pane.setStyle("-fx-background-radius: 5; -fx-background-color: #121111;");
-        pane.setPadding(new Insets(paddingY, paddingX, paddingY, paddingX));
+        pane.getStyleClass().add("song-info-box");
 
-//      Title
-        Label title = createLabel("Ahora reproduciendo", 18, "white");
+        //  Title
+        Font titleFont = loadFont(primaryFontPath, 18);
+        Label title = createLabel("Ahora reproduciendo", titleFont, "white");
 
-//      Song Image
+        //  Song Image
         ImageView songImageView = new SongImage(paneContentWidth, song.getImagePath()).getImage();
 
-//      Song Name
-        Label songName = createLabel(song.getSongName(), 32, "white");
+        //  Song Name
+        Font songNameFont = loadFont(primaryFontPath, 32);
+        Label songName = createLabel(song.getSongName(), songNameFont, "white");
 
-//      Artist Name
-        Label songArtist = createLabel(song.getArtistName(), 18, "#C0C0C0");
+        //  Artist Name
+        Font sonArtistFont = loadFont(primaryFontPath, 18);
+        Label songArtist = createLabel(song.getArtistName(), sonArtistFont, "#C0C0C0");
 
-//      Up Votes
-        VoteButton voteUpButton = new VoteButton("like.png", "voted-up.png");
-        Label voteUpLabel = createLabel(String.valueOf(song.getTotalUpVotes()), 30, "white");
-        HBox voteUpBox = new HBox(voteUpButton.getButton(), voteUpLabel);
+        //  Votes
+        Font votesFont = loadFont(primaryFontPath, 30);
+        VotesBox votesBox = new VotesBox(song.getTotalUpVotes(), song.getTotalDownVotes(), votesFont);
 
-//      Down Votes
-        VoteButton voteDownButton = new VoteButton("dislike.png", "voted-down.png");
-        Label voteDownLabel = createLabel(String.valueOf(song.getTotalDownVotes()), 30, "white");
-        HBox voteDownBox = new HBox(voteDownButton.getButton(), voteDownLabel);
-
-//      Votes Box
-        HBox votesBox = new HBox(10);
-        votesBox.getChildren().addAll(voteUpBox, voteDownBox);
-
-//      Votes Button functionality
-        voteUpButton.getButton().setOnAction(event -> handleUpVote(voteUpButton, voteDownButton, voteUpLabel, voteDownLabel, song));
-
-        voteDownButton.getButton().setOnAction(event -> handleDownVote(voteDownButton, voteUpButton, voteDownLabel, voteUpLabel, song));
-
-//      Album Name
+        //  Album Name
         StackPane albumPane = new InfoRec(paneContentWidth, 70, "Album", song.getAlbumName()).getInfoRec();
 
-//      Genre
+        //  Genre
         StackPane genrePane = new InfoRec(paneContentWidth, 70, "Género", song.getMusicGenre()).getInfoRec();
 
-//      Song Info Box
-        VBox songInfoBox = new VBox(10);
-        songInfoBox.getChildren().addAll(songName, songArtist, votesBox, albumPane, genrePane);
+        //  MP3 Reference
+        Font referenceButtonFont = loadFont(buttonFontPath, 16);
+        Button referenceButton = createReferenceButton(referenceButtonFont, song.getFilePath());
 
-//      Add elements to the main pane
+        //  Song Info Box
+        VBox songInfoBox = new VBox(10);
+        songInfoBox.getChildren().addAll(songName, songArtist, votesBox.getVotesBox(), albumPane, genrePane, referenceButton);
+
+        //  Add elements to the main pane
         pane.getChildren().addAll(title, songImageView, songInfoBox);
 
     }
@@ -89,46 +90,65 @@ public class SongInfoSection {
         return pane;
     }
 
-    // Private method to create a label with the specified text, font size, and text color
-    private Label createLabel(String text, double fontSize, String textColor) {
+    /**
+     * Creates a label with the specified text, font, and text color.
+     *
+     * @param text      The text to be displayed on the label.
+     * @param font      The font for the label text.
+     * @param textColor The color of the label text.
+     * @return The created label.
+     */
+    private Label createLabel(String text, Font font, String textColor) {
         Label label = new Label(text);
         label.setStyle("-fx-text-fill: " + textColor + ";");
-        label.setFont(Font.loadFont(getClass().getResourceAsStream("Gotham-Font/Gotham-Bold.otf"), fontSize));
+        label.setFont(font);
         return label;
     }
 
-    // Private method to handle up vote
-    private void handleUpVote(VoteButton voteUpButton, VoteButton voteDownButton, Label voteUpLabel, Label voteDownLabel, Song song) {
-        if (voteDownButton.getSelected()) {
-            voteDownButton.changeImage();
-            song.reduceDownVote();
-            voteDownLabel.setText(String.valueOf(song.getTotalDownVotes()));
-        }
-        if (!voteUpButton.getSelected()) {
-            song.addUpVote();
-        } else {
-            song.reduceUpVote();
-        }
-        voteUpLabel.setText(String.valueOf(song.getTotalUpVotes()));
-        voteUpButton.changeImage();
+    /**
+     * Creates a button for opening the file explorer at the specified file path.
+     *
+     * @param font     The font for the button text.
+     * @param filePath The path to the file to be opened in the file explorer.
+     * @return The created reference button.
+     */
+    private Button createReferenceButton(Font font, String filePath) {
+        Button referenceButton = new Button("Ir al MP3");
+        referenceButton.getStyleClass().add("reference-button");
+        referenceButton.setFont(font);
+
+        // Functionality
+        referenceButton.setOnAction(event -> openFileExplorer(filePath));
+
+        return referenceButton;
     }
 
-    // Private method to handle down vote
-    private void handleDownVote(VoteButton voteDownButton, VoteButton voteUpButton, Label voteDownLabel, Label voteUpLabel, Song song) {
-        if (voteUpButton.getSelected()) {
-            voteUpButton.changeImage();
-            song.reduceUpVote();
-            voteUpLabel.setText(String.valueOf(song.getTotalUpVotes()));
+    /**
+     * Opens the file explorer at the specified file path.
+     *
+     * @param filePath The path of the file or directory to be opened in the file explorer.
+     */
+    private void openFileExplorer(String filePath) {
+        try {
+            File directory = new File(filePath);
+            Desktop.getDesktop().open(directory);
+            System.out.println("Se abrió el explorador de archivos en el directorio: " + filePath);
+
+        } catch (IOException e) {
+            System.out.println("No se pudo abrir el explorador de archivos.");
+            e.printStackTrace();
         }
-        if (!voteDownButton.getSelected()) {
-            song.addDownVote();
-        } else {
-            song.reduceDownVote();
-        }
-        voteDownLabel.setText(String.valueOf(song.getTotalDownVotes()));
-        voteDownButton.changeImage();
+    }
+
+    /**
+     * Loads a font from the specified font path with the given font size.
+     *
+     * @param fontPath The path to the font file.
+     * @param fontSize The size of the font to load.
+     * @return The loaded Font object.
+     */
+    private Font loadFont(String fontPath, double fontSize) {
+        return Font.loadFont(getClass().getResourceAsStream(fontPath), fontSize);
     }
 
 }
-
-// TODO: Agregar referencia al archivo mp3.
