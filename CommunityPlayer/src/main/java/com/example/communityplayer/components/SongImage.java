@@ -6,7 +6,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.jaudiotagger.tag.datatype.Artwork;
 
+import java.io.ByteArrayInputStream;
 import java.util.Objects;
 
 /**
@@ -16,14 +18,20 @@ public class SongImage {
     private final ImageView image;
 
     /**
-     * Constructs a SongImage object with the specified size and image path.
+     * Constructs a SongImage object with the specified size and mp3 artwork.
      *
-     * @param size      The size of the image (width and height).
-     * @param imagePath The path to the image file.
+     * @param size    The size of the image (width and height).
+     * @param artwork The artwork from the mp3 file.
      */
-    public SongImage(double size, String imagePath) {
-        Image songImage = new Image(Objects.requireNonNull(getClass().getResource(imagePath)).toExternalForm());
-        image = new ImageView(songImage);
+    public SongImage(double size, Artwork artwork) {
+        if (artwork != null) {
+            byte[] imageData = artwork.getBinaryData();
+            Image songImage = new Image(new ByteArrayInputStream(imageData));
+            image = new ImageView(songImage);
+        } else {
+            Image songImage = new Image(Objects.requireNonNull(getClass().getResource("images/unknown.jpg")).toExternalForm());
+            image = new ImageView(songImage);
+        }
         image.setFitWidth(size);
         image.setFitHeight(size);
 

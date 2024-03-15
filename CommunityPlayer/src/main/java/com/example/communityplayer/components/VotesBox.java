@@ -1,5 +1,6 @@
 package com.example.communityplayer.components;
 
+import com.example.communityplayer.Song;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -9,41 +10,26 @@ import javafx.scene.text.Text;
  * Represents a box containing voting information for a song, including up votes and down votes.
  */
 public class VotesBox {
-    private int upVotes; // Number of up votes
-    private int downVotes; // Number of down votes
+
+    private final Song song;
     private final HBox votesBox; // Container for the voting buttons and labels
+
+    private enum VoteType {
+        UP,
+        DOWN
+    }
 
     /**
      * Constructs a new VotesBox with the specified number of up votes, down votes, and font.
      *
-     * @param upVotes   The number of up votes.
-     * @param downVotes The number of down votes.
-     * @param font      The font used for the vote labels.
+     * @param song The song associated with the VotesBox.
+     * @param font The font used for the vote labels.
      */
-    public VotesBox(int upVotes, int downVotes, Font font) {
-        this.upVotes = upVotes;
-        this.downVotes = downVotes;
+    public VotesBox(Song song, Font font) {
+        this.song = song;
 
         votesBox = createVotesBox(font);
 
-    }
-
-    /**
-     * Gets the number of up votes.
-     *
-     * @return The number of up votes.
-     */
-    public int getUpVotes() {
-        return upVotes;
-    }
-
-    /**
-     * Gets the number of down votes.
-     *
-     * @return The number of down votes.
-     */
-    public int getDownVotes() {
-        return downVotes;
     }
 
     /**
@@ -66,12 +52,12 @@ public class VotesBox {
 
         //  Up Votes
         VoteButton voteUpButton = new VoteButton("images/like.png", "images/voted-up.png");
-        Label voteUpLabel = createLabel(formatLargeNumber(upVotes), font, widthForFourChars);
+        Label voteUpLabel = createLabel(formatLargeNumber(song.getTotalUpVotes()), font, widthForFourChars);
         HBox voteUpBox = new HBox(voteUpButton.getButton(), voteUpLabel);
 
         //  Down Votes
         VoteButton voteDownButton = new VoteButton("images/dislike.png", "images/voted-down.png");
-        Label voteDownLabel = createLabel(formatLargeNumber(downVotes), font, widthForFourChars);
+        Label voteDownLabel = createLabel(formatLargeNumber(song.getTotalDownVotes()), font, widthForFourChars);
         HBox voteDownBox = new HBox(voteDownButton.getButton(), voteDownLabel);
 
         //  Votes Box
@@ -79,8 +65,8 @@ public class VotesBox {
         box.getChildren().addAll(voteUpBox, voteDownBox);
 
         //  Votes Button functionality
-        voteUpButton.getButton().setOnAction(event -> handleVote(voteUpButton, voteDownButton, voteUpLabel, voteDownLabel, true));
-        voteDownButton.getButton().setOnAction(event -> handleVote(voteDownButton, voteUpButton, voteDownLabel, voteUpLabel, false));
+        voteUpButton.getButton().setOnAction(event -> handleVote(voteUpButton, voteDownButton, voteUpLabel, voteDownLabel, VoteType.UP));
+        voteDownButton.getButton().setOnAction(event -> handleVote(voteDownButton, voteUpButton, voteDownLabel, voteUpLabel, VoteType.DOWN));
 
         return box;
     }
@@ -108,23 +94,23 @@ public class VotesBox {
      * @param otherButton    The other vote button.
      * @param selectedLabel  The label corresponding to the selected vote.
      * @param otherLabel     The label corresponding to the other vote.
-     * @param isUpVote       Indicates if it's an up vote (true) or down vote (false).
+     * @param voteType       Indicates if it's an up vote or down vote.
      */
-    private void handleVote(VoteButton selectedButton, VoteButton otherButton, Label selectedLabel, Label otherLabel, boolean isUpVote) {
+    private void handleVote(VoteButton selectedButton, VoteButton otherButton, Label selectedLabel, Label otherLabel, VoteType voteType) {
         if (otherButton.getSelected()) {
             otherButton.changeImage();
-            if (isUpVote) downVotes -= 1;
-            else upVotes -= 1;
-            otherLabel.setText(formatLargeNumber(isUpVote ? downVotes : upVotes));
+            if (voteType == VoteType.UP) song.setTotalDownVotes(song.getTotalDownVotes() - 1);
+            else song.setTotalUpVotes(song.getTotalUpVotes() - 1);
+            otherLabel.setText(formatLargeNumber(voteType == VoteType.UP ? song.getTotalDownVotes() : song.getTotalUpVotes()));
         }
         if (!selectedButton.getSelected()) {
-            if (isUpVote) upVotes += 1;
-            else downVotes += 1;
+            if (voteType == VoteType.UP) song.setTotalUpVotes(song.getTotalUpVotes() + 1);
+            else song.setTotalDownVotes(song.getTotalDownVotes() + 1);
         } else {
-            if (isUpVote) upVotes -= 1;
-            else downVotes -= 1;
+            if (voteType == VoteType.UP) song.setTotalUpVotes(song.getTotalUpVotes() - 1);
+            else song.setTotalDownVotes(song.getTotalDownVotes() - 1);
         }
-        selectedLabel.setText(formatLargeNumber(isUpVote ? upVotes : downVotes));
+        selectedLabel.setText(formatLargeNumber(voteType == VoteType.UP ? song.getTotalUpVotes() : song.getTotalDownVotes()));
         selectedButton.changeImage();
     }
 

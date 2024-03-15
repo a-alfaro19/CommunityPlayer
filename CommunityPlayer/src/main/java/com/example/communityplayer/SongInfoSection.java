@@ -48,10 +48,10 @@ public class SongInfoSection {
         Label title = createLabel("Ahora reproduciendo", titleFont, "white");
 
         //  Song Image
-        ImageView songImageView = new SongImage(paneContentWidth, song.getImagePath()).getImage();
+        ImageView songImageView = new SongImage(paneContentWidth, song.getArtwork()).getImage();
 
         //  Song Name
-        Font songNameFont = loadFont(primaryFontPath, 32);
+        Font songNameFont = loadFont(primaryFontPath, 28);
         Label songName = createLabel(song.getSongName(), songNameFont, "white");
 
         //  Artist Name
@@ -60,7 +60,7 @@ public class SongInfoSection {
 
         //  Votes
         Font votesFont = loadFont(primaryFontPath, 30);
-        VotesBox votesBox = new VotesBox(song.getTotalUpVotes(), song.getTotalDownVotes(), votesFont);
+        VotesBox votesBox = new VotesBox(song, votesFont);
 
         //  Album Name
         StackPane albumPane = new InfoRec(paneContentWidth, 70, "Album", song.getAlbumName()).getInfoRec();

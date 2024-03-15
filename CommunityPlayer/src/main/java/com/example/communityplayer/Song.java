@@ -1,5 +1,7 @@
 package com.example.communityplayer;
 
+import org.jaudiotagger.tag.datatype.Artwork;
+
 /**
  * A class representing a song.
  */
@@ -12,7 +14,7 @@ public class Song {
     private int totalUpVotes;
     private int totalDownVotes;
     private final String filePath;
-    private final String imagePath;
+    private final Artwork artwork;
 
     /**
      * Constructs a Song object with the specified parameters.
@@ -23,16 +25,16 @@ public class Song {
      * @param albumName   The name of the album.
      * @param musicGenre  The genre of the music.
      * @param filePath    The file path of the song.
-     * @param imagePath   The file path of the song's image.
+     * @param artwork     The song's artwork.
      */
-    public Song(String id, String songName, String artistName, String albumName, String musicGenre, String filePath, String imagePath) {
+    public Song(String id, String songName, String artistName, String albumName, String musicGenre, String filePath, Artwork artwork) {
         this.id = id;
         this.songName = songName;
         this.artistName = artistName;
         this.albumName = albumName;
         this.musicGenre = musicGenre;
         this.filePath = filePath;
-        this.imagePath = imagePath;
+        this.artwork = artwork;
     }
 
     /**
@@ -106,11 +108,11 @@ public class Song {
     }
 
     /**
-     * Gets the file path of the song's image.
+     * Gets the song's artwork.
      *
      * @return The image file path.
      */
-    public String getImagePath() { return imagePath; }
+    public Artwork getArtwork() { return artwork; }
 
     /**
      * Sets the total number of up votes for the song.
@@ -128,6 +130,26 @@ public class Song {
      */
     public void setTotalDownVotes(int votes) {
         totalDownVotes = votes;
+    }
+
+    /**
+     * Returns a string representation of the song, including its attributes.
+     *
+     * @return A string representation of the song.
+     */
+    @Override
+    public String toString() {
+        return "Song{" +
+                "id='" + id + '\'' +
+                ", songName='" + songName + '\'' +
+                ", artistName='" + artistName + '\'' +
+                ", albumName='" + albumName + '\'' +
+                ", musicGenre='" + musicGenre + '\'' +
+                ", totalUpVotes=" + totalUpVotes +
+                ", totalDownVotes=" + totalDownVotes +
+                ", filePath='" + filePath + '\'' +
+                ", artwork=" + artwork +
+                '}';
     }
 
 }

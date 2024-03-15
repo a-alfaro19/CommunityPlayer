@@ -2,6 +2,7 @@ module com.example.communityplayer {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires jaudiotagger;
 
 
     opens com.example.communityplayer to javafx.fxml;

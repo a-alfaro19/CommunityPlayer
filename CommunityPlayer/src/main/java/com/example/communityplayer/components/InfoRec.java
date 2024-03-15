@@ -1,10 +1,8 @@
 package com.example.communityplayer.components;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
@@ -33,7 +31,7 @@ public class InfoRec {
 
         Label albumNameLabel = new Label(value);
         albumNameLabel.getStyleClass().add("albumNameLabel");
-        albumNameLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/com/example/communityplayer/Gotham-Font/GothamMedium.ttf"), 18));
+        albumNameLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/com/example/communityplayer/Gotham-Font/GothamMedium.ttf"), 16));
 
         albumNameBox.getChildren().addAll(albumNameTagLabel, albumNameLabel);
         albumNameBox.getStyleClass().add("albumNameBox");

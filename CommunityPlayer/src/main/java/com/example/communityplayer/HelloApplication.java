@@ -14,9 +14,11 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        MP3MetadataExtractor extractor = new MP3MetadataExtractor("C:/Users/andre/Music/Playlist-Indie-500608900-Jamendo-MP3");
+
         int padding = 15;
 
-        Song song = new Song("0", "Perfect", "Ed Sheeran", "Divide", "Baladas", "./", "images/divide.jpg");
+        Song song = extractor.getSongList().get(0);
 
         SongInfoSection songInfoSection = new SongInfoSection(song, size, padding);
 
