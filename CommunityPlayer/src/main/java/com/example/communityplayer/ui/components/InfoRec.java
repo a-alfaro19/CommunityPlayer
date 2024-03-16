@@ -1,4 +1,4 @@
-package com.example.communityplayer.components;
+package com.example.communityplayer.ui.components;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -27,11 +27,11 @@ public class InfoRec {
         VBox albumNameBox = new VBox(15);
         Label albumNameTagLabel = new Label(tag);
         albumNameTagLabel.getStyleClass().add("albumNameTagLabel");
-        albumNameTagLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/com/example/communityplayer/Gotham-Font/GothamMedium.ttf"), 24));
+        albumNameTagLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/com/example/communityplayer/ui/Gotham-Font/GothamMedium.ttf"), 24));
 
         Label albumNameLabel = new Label(value);
         albumNameLabel.getStyleClass().add("albumNameLabel");
-        albumNameLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/com/example/communityplayer/Gotham-Font/GothamMedium.ttf"), 16));
+        albumNameLabel.setFont(Font.loadFont(getClass().getResourceAsStream("/com/example/communityplayer/ui/Gotham-Font/GothamMedium.ttf"), 16));
 
         albumNameBox.getChildren().addAll(albumNameTagLabel, albumNameLabel);
         albumNameBox.getStyleClass().add("albumNameBox");

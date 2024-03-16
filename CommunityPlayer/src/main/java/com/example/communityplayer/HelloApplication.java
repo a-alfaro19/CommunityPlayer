@@ -1,5 +1,6 @@
 package com.example.communityplayer;
 
+import com.example.communityplayer.ui.SongInfoSection;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -14,7 +15,8 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        MP3MetadataExtractor extractor = new MP3MetadataExtractor("C:/Users/andre/Music/Playlist-Indie-500608900-Jamendo-MP3");
+        ConfigFileLoader configFileLoader = new ConfigFileLoader("C:/Users/andre/OneDrive/Documents/GitHub/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini");
+        MP3MetadataExtractor extractor = new MP3MetadataExtractor(configFileLoader.getPath());
 
         int padding = 15;
 
