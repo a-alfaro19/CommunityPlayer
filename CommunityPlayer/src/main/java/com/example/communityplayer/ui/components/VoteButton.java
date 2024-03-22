@@ -1,4 +1,4 @@
-package com.example.communityplayer.components;
+package com.example.communityplayer.ui.components;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;

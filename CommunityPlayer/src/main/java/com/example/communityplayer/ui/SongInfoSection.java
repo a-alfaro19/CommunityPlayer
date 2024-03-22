@@ -1,8 +1,9 @@
-package com.example.communityplayer;
+package com.example.communityplayer.ui;
 
-import com.example.communityplayer.components.InfoRec;
-import com.example.communityplayer.components.SongImage;
-import com.example.communityplayer.components.VotesBox;
+import com.example.communityplayer.Song;
+import com.example.communityplayer.ui.components.InfoRec;
+import com.example.communityplayer.ui.components.SongImage;
+import com.example.communityplayer.ui.components.VotesBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;

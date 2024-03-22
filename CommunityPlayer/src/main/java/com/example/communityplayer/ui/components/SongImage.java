@@ -1,4 +1,4 @@
-package com.example.communityplayer.components;
+package com.example.communityplayer.ui.components;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
