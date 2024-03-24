@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Rectangle?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.communityplayer.SongInfoSectionController" styleClass="song-info-pane" >
+    <Label text="Ahora reproduciendo" styleClass="song-info-title-label" />
+
+    <ImageView fx:id="songImageView" />
+
+    <VBox spacing="10">
+        <Label fx:id="songName" styleClass="song-info-song-name" />
+        <Label fx:id="artistName" styleClass="song-info-artist-name" />
+
+        <HBox spacing="15">
+            <HBox spacing="5" >
+                <ImageView fx:id="upVotesIcon" fitWidth="28" fitHeight="28" />
+                <Label fx:id="totalUpVotes" styleClass="votes-label" />
+            </HBox>
+            <HBox spacing="5">
+                <ImageView fx:id="downVotesIcon" fitWidth="28" fitHeight="28" />
+                <Label fx:id="totalDownVotes" styleClass="votes-label" />
+            </HBox>
+        </HBox>
+
+        <StackPane>
+            <Rectangle styleClass="song-info-rectangle" width="297" height="70" />
+            <VBox styleClass="info-rec-box">
+                <Label styleClass="info-rec-tag" text="Album" />
+                <Label fx:id="songAlbum" styleClass="info-rec-data" />
+            </VBox>
+        </StackPane>
+
+        <StackPane>
+            <Rectangle styleClass="song-info-rectangle" width="297" height="70" />
+            <VBox styleClass="info-rec-box">
+                <Label styleClass="info-rec-tag" text="Género" />
+                <Label fx:id="songGenre" styleClass="info-rec-data" />
+            </VBox>
+        </StackPane>
+
+        <Button fx:id="referenceButton" text="Ir al MP3" styleClass="reference-button" />
+    </VBox>
+
+
+</VBox>
+

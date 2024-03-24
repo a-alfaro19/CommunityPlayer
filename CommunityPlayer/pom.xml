@@ -52,6 +52,12 @@
             <version>0.5.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -75,7 +81,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.communityplayer/com.example.communityplayer.HelloApplication
+                            <mainClass>com.example.communityplayer/com.example.communityplayer.App
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
