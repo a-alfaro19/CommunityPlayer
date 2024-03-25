@@ -1,5 +1,6 @@
 package com.example.communityplayer;
 
+import com.example.communityplayer.controllers.AppController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +24,7 @@ public class App extends Application {
 
 
         // Load FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/app.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("controllers/app.fxml"));
         Parent root = loader.load();
 
         // Load Controller

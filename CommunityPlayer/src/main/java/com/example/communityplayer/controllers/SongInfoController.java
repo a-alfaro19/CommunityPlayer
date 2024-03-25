@@ -1,10 +1,15 @@
-package com.example.communityplayer;
+package com.example.communityplayer.controllers;
 
+import com.example.communityplayer.Song;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.SnapshotParameters;
@@ -15,26 +20,56 @@ import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class SongInfoSectionController {
-    public Label songName;
-    public Label artistName;
-    public Label totalUpVotes;
-    public ImageView upVotesIcon;
-    public ImageView downVotesIcon;
-    public Label totalDownVotes;
-    public Label songAlbum;
-    public Label songGenre;
-    public Button referenceButton;
+public class SongInfoController implements Initializable {
+
     @FXML
     private ImageView songImageView;
+    @FXML
+    public VBox songDataBox;
+    @FXML
+    public Label songName;
+    @FXML
+    public Label artistName;
+    @FXML
+    public Label totalUpVotes;
+    @FXML
+    public ImageView upVotesIcon;
+    @FXML
+    public ImageView downVotesIcon;
+    @FXML
+    public Label totalDownVotes;
+    @FXML
+    public Label songAlbum;
+    @FXML
+    public Label songGenre;
+    @FXML
+    public Button referenceButton;
 
     private Song currentSong;
 
-    public void initialize(Song currentSong) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        totalUpVotes.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+
+            }
+        });
+
+
+    }
+
+    public void updateView(Song currentSong) {
         this.currentSong = currentSong;
 
+        songImageView.setVisible(true);
+        songDataBox.setVisible(true);
+
+        loadArtWork();
         songName.setText(currentSong.getSongName());
         artistName.setText(currentSong.getArtistName());
         upVotesIcon.setImage(new Image(Objects.requireNonNull(getClass().getResource("images/like.png")).toExternalForm()));
@@ -45,8 +80,6 @@ public class SongInfoSectionController {
         songGenre.setText(currentSong.getMusicGenre());
 
         referenceButton.setOnAction(event -> openFileExplorer(currentSong.getFilePath()));
-
-        loadArtWork();
     }
 
     private Artwork getSongArtWork() {
