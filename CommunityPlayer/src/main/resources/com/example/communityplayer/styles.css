@@ -1,12 +1,73 @@
-/* Song info box */
-.song-info-box {
-    -fx-background-radius: 5;
-    -fx-background-color: #121111;
-    -fx-padding: 25px 20px;
+/* ROOT */
+.root {
+    -fx-background-color: #000000;
+    -fx-pref-width: 1350px;
+    -fx-pref-height: 800px;
+    -fx-padding: 15px;
 }
 
 
-/* Reference Button */
+/* SONG INFO SECTION */
+.song-info-pane {
+    -fx-pref-width: 337,5px;
+    -fx-background-radius: 5;
+    -fx-background-color: #121111;
+    -fx-padding: 25px 20px;
+    -fx-spacing: 20px;
+}
+
+.song-info-title-label {
+    -fx-font-family: "Gotham";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+}
+
+.song-info-song-name {
+    -fx-font-family: "Gotham";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+}
+
+.song-info-artist-name {
+    -fx-font-family: "Gotham";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+}
+
+.votes-label {
+    -fx-font-family: "Gotham";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+}
+
+.song-info-rectangle {
+    -fx-fill: #232323;
+    -fx-arc-width: 20;
+    -fx-arc-height: 20;
+}
+
+.info-rec-box {
+    -fx-spacing: 15;
+    -fx-padding: 15 10;
+}
+
+.info-rec-tag {
+    -fx-text-fill: white;
+    -fx-underline: true;
+    -fx-font-size: 24px;
+    -fx-font-family: "Gotham";
+}
+
+.info-rec-data {
+    -fx-text-fill: #C0C0C0;
+    -fx-font-size: 16px;
+    -fx-font-family: "Gotham";
+}
+
 .reference-button {
     -fx-background-color: #121111;
     -fx-background-radius: 15px;
@@ -15,30 +76,11 @@
     -fx-border-width: 1px;
     -fx-border-radius: 15px;
     -fx-padding: 10px 10px;
+    -fx-font-family: "Gotham";
+    -fx-font-weight: 900;
+    -fx-font-size: 16px;
 }
 
 .reference-button:hover {
     -fx-border-color: white;
-}
-
-
-/* Info Rec */
-.rectangle {
-    -fx-fill: #232323;
-    -fx-arc-width: 20;
-    -fx-arc-height: 20;
-}
-
-.albumNameTagLabel {
-    -fx-text-fill: white;
-    -fx-underline: true;
-}
-
-.albumNameLabel {
-    -fx-text-fill: #C0C0C0;
-}
-
-.albumNameBox {
-    -fx-spacing: 15;
-    -fx-padding: 15 10;
 }

@@ -117,19 +117,17 @@ public class Song {
     /**
      * Sets the total number of up votes for the song.
      *
-     * @param votes The new total number of up votes to set.
      */
-    public void setTotalUpVotes(int votes) {
-        totalUpVotes = votes;
+    public void voteUp() {
+        totalUpVotes++;
     }
 
     /**
      * Sets the total number of down votes for the song.
      *
-     * @param votes The new total number of down votes to set.
      */
-    public void setTotalDownVotes(int votes) {
-        totalDownVotes = votes;
+    public void voteDown() {
+        totalDownVotes++;
     }
 
     /**

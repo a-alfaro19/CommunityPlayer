@@ -1,5 +1,6 @@
 package com.example.communityplayer;
 
+import com.example.communityplayer.ds.DoubleLinkedList;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
@@ -16,7 +17,7 @@ import java.util.UUID;
  */
 public class MP3MetadataExtractor {
     // List to store song metadata
-    private DoubleLinkedList<Song> songList;
+    private SongPlaylist songList;
 
     /**
      * Constructor for the MP3MetadataExtractor class.
@@ -28,7 +29,7 @@ public class MP3MetadataExtractor {
 
         try {
             // Initialize the song list
-            songList = new DoubleLinkedList<>();
+            songList = new SongPlaylist();
 
             // Iterate through MP3 files and extract their metadata
             for (File file : mp3Files) {
@@ -63,7 +64,7 @@ public class MP3MetadataExtractor {
 
                 // Create a Song object with the extracted metadata and add it to the song list
                 Song song = new Song(key, title, artist, album, genre, absolutePath, artwork);
-                songList.add(song);
+                songList.insert(song);
             }
 
         } catch (Exception e) {
@@ -109,7 +110,7 @@ public class MP3MetadataExtractor {
      * Method to get the list of songs.
      * @return List of songs.
      */
-    public DoubleLinkedList<Song> getSongList() {
+    public SongPlaylist getSongList() {
         return songList;
     }
 }
