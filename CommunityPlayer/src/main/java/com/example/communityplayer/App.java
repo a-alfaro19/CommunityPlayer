@@ -22,7 +22,6 @@ public class App extends Application {
         loadFont("fonts/GothamMedium.ttf");
         loadFont("Gotham-Font/Gotham-Black.otf");
 
-
         // Load FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("controllers/app.fxml"));
         Parent root = loader.load();

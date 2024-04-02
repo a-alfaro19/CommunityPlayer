@@ -149,5 +149,4 @@ public class Song {
                 ", artwork=" + artwork +
                 '}';
     }
-
 }

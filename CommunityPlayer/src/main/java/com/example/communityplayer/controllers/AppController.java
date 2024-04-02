@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
 
@@ -21,16 +23,19 @@ import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 public class AppController implements Initializable {
-    public AnchorPane main;
+    public VBox main;
     @FXML
     public HBox sectionBox;
     @FXML
+    public VBox sectionSecundaryBox;
+    @FXML
     private SongInfoController songInfoController;
+    @FXML
+    private BarController barController;
     @FXML
     public Button communityPlaylist;
     @FXML
     public Button next;
-
     private SongPlaylist songList;
     private Iterator<Song> iterator; // temp
     private int serverPort;
@@ -42,6 +47,7 @@ public class AppController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Sections
         loadSongInfoSection();
+        loadBarSection();
 
         // Load Config File
         loadConfigFile();
@@ -55,7 +61,8 @@ public class AppController implements Initializable {
 
         communityPlaylist.setOnAction(event -> startServer());
         next.setOnAction(event -> nextSong(iterator));
-
+        barController.nextButtomIcon.setOnAction(event -> nextSong(iterator));
+        barController.previousButtomIcon.setOnAction(event -> previousSong(iterator));
     }
 
     private void nextSong(Iterator<Song> iterator) {
@@ -63,10 +70,19 @@ public class AppController implements Initializable {
         System.out.println(currentSong.getId());
 
         songInfoController.updateView(currentSong);
+        barController.updateView(currentSong);
+    }
+
+    private void previousSong(Iterator<Song> iterator){
+        Song currentSong = iterator.prev().data;
+        System.out.println(currentSong.getId());
+
+        songInfoController.updateView(currentSong);
+        barController.updateView(currentSong);
     }
 
     private void loadConfigFile() {
-        String configFilePath = "C:/Users/andre/OneDrive/Documents/GitHub/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
+        String configFilePath = "C:/Users/Brene/OneDrive/Escritorio/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
 
         try {
             Ini iniConfig = new Ini(new File(configFilePath)); // Load the INI file
@@ -99,6 +115,16 @@ public class AppController implements Initializable {
             e.printStackTrace();
         }
     }
+    private void loadBarSection() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("barSection.fxml"));
+            Parent barSection = loader.load();
+            barController = loader.getController();
+            sectionSecundaryBox.getChildren().add(barSection); // Agrega al final de sectionSecundaryBox
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void createServer() {
         try {
@@ -108,12 +134,10 @@ public class AppController implements Initializable {
             System.out.println("Error creando servidor!");
             e.printStackTrace();
         }
-
     }
 
     private void startServer() {
         server.start();
         server.receiveRequest(songInfoController);
     }
-
 }

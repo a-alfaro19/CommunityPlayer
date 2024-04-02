@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<HBox styleClass="bar-controller-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.communityplayer.controllers.BarController">
+    <ImageView fx:id="songImageView" fitHeight="80" fitWidth="80" visible="false" />
+    <StackPane>
+        <Rectangle height="100" styleClass="bar-controller-rectangle" width="150" />
+        <VBox styleClass="info-rec-box">
+            <Label fx:id="songName" styleClass="bar-info-song-name" />
+            <Label fx:id="artistName" styleClass="bar-info-artist-name" />
+        </VBox>
+    </StackPane>
+    <StackPane>
+        <Rectangle height="100" styleClass="bar-controller-rectangle" width="880" />
+        <VBox>
+            <StackPane>
+                <Rectangle height="48" styleClass="bar-controller-rectangle" width="880" />
+                <HBox styleClass="bar-info-rec-box">
+                    <Button fx:id="previousButtomIcon" styleClass="bar-reference-button" />
+                    <Button fx:id="playButtomIcon" styleClass="bar-reference-button" />
+                    <Button fx:id="nextButtomIcon" styleClass="bar-reference-button" />
+                </HBox>
+            </StackPane>
+            <StackPane>
+                <Rectangle height="48" styleClass="bar-controller-rectangle" width="880" />
+                <HBox styleClass="bar-info-rec-box">
+                    <Label fx:id="currentTimeLabel" styleClass="bar-info-progressLabel"/>
+                    <ProgressBar fx:id="progressBarSong" styleClass="progressBar" prefWidth="380"/>
+                    <Label fx:id="currentFinalTimeLabel" styleClass="bar-info-progressLabel"/>
+                </HBox>
+            </StackPane>
+        </VBox>
+    </StackPane>
+    <StackPane styleClass="bar-controller-rectangle">
+        <Rectangle height="100" styleClass="bar-controller-rectangle" width="240" />
+        <HBox styleClass="bar-info-rec-box2">
+            <Button fx:id="deleteButtomIcon" styleClass="bar-reference-button" />
+            <ImageView fx:id="volumenIcon" fitHeight="18" fitWidth="18" />
+            <ProgressBar fx:id="progressBarVol" styleClass="progressBar" prefWidth="110"/>
+        </HBox>
+    </StackPane>
+</HBox>

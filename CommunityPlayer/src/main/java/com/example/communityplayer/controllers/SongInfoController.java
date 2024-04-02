@@ -78,7 +78,6 @@ public class SongInfoController implements Initializable {
         totalDownVotes.setText(String.valueOf(currentSong.getTotalDownVotes()));
         songAlbum.setText(currentSong.getAlbumName());
         songGenre.setText(currentSong.getMusicGenre());
-
         referenceButton.setOnAction(event -> openFileExplorer(currentSong.getFilePath()));
     }
 
@@ -98,8 +97,8 @@ public class SongInfoController implements Initializable {
             Image defaultImage = new Image(Objects.requireNonNull(getClass().getResource("images/unknown.jpg")).toExternalForm());
             songImageView.setImage(defaultImage);
         }
-        songImageView.setFitWidth(297);
-        songImageView.setFitHeight(297);
+        songImageView.setFitWidth(200);
+        songImageView.setFitHeight(200);
 
         Rectangle clipRect = new Rectangle(
                 songImageView.getFitWidth(), songImageView.getFitHeight()

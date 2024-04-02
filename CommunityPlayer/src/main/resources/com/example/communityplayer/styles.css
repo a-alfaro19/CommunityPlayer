@@ -2,20 +2,24 @@
 .root {
     -fx-background-color: #000000;
     -fx-pref-width: 1350px;
-    -fx-pref-height: 800px;
-    -fx-padding: 15px;
+    -fx-pref-height: 660px;
+    -fx-padding: 10px;
 }
 
+.rootSecundary{
+    -fx-background-color: #000000;
+    -fx-pref-width: 1350px;
+    -fx-pref-height: 100px;
+}
 
 /* SONG INFO SECTION */
 .song-info-pane {
-    -fx-pref-width: 337,5px;
+    -fx-pref-width: 337.5px;
     -fx-background-radius: 5;
     -fx-background-color: #121111;
-    -fx-padding: 25px 20px;
+    -fx-padding: 23px 18px;
     -fx-spacing: 20px;
 }
-
 .song-info-title-label {
     -fx-font-family: "Gotham";
     -fx-font-weight: bold;
@@ -27,7 +31,7 @@
     -fx-font-family: "Gotham";
     -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-font-size: 28px;
+    -fx-font-size: 26px;
 }
 
 .song-info-artist-name {
@@ -84,3 +88,60 @@
 .reference-button:hover {
     -fx-border-color: white;
 }
+
+.bar-controller-pane {
+    -fx-pref-width: 1350px;
+    -fx-background-color: #000000;
+}
+
+.bar-Controller-rectangle{
+    -fx-fill: #000000;
+    -fx-alignment: center;
+}
+
+.bar-info-rec-box {
+    -fx-spacing: 12;
+    -fx-alignment: center;
+}
+
+.bar-info-rec-box2 {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+
+}
+
+.bar-info-song-name {
+    -fx-font-family: "Gotham";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-max-pref-width:120px;
+}
+.bar-info-artist-name {
+    -fx-font-family: "Gotham";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+}
+.bar-info-progressLabel{
+    -fx-font-family:"Gotham";
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+
+.bar-reference-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.progressBar{
+    -fx-pref-height:9.5px;
+}
+.progressBar .track{
+    -fx-background-color: #2C2C2C;
+}
+.progressBar .bar{
+    -fx-background-color: #E3E3E3;
+}
+
+

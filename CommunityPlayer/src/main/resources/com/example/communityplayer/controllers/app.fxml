@@ -3,18 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="main" fx:controller="com.example.communityplayer.controllers.AppController"
-            prefWidth="1350" prefHeight="800"
-            xmlns:fx="http://javafx.com/fxml">
+<VBox fx:id="main" fx:controller="com.example.communityplayer.controllers.AppController"
+      prefWidth="1350" prefHeight="800"
+      xmlns:fx="http://javafx.com/fxml">
 
     <HBox fx:id="sectionBox" styleClass="root">
+        <VBox>
+            <Button fx:id="communityPlaylist">Community Playlist</Button>
+            <Button fx:id="next">Next Song</Button>
+        </VBox>
 
     </HBox>
 
-    <HBox>
-        <Button fx:id="communityPlaylist">Community Playlist</Button>
-        <Button fx:id="next">Next Song</Button>
-    </HBox>
+    <VBox fx:id="sectionSecundaryBox" styleClass="rootSecundary">
 
-</AnchorPane>
+    </VBox>
+
+</VBox>
 
