@@ -26,3 +26,4 @@ C:\Users\benav\IdeaProjects\CommunityPlayer\Cliente\obj\Debug\net8.0-windows\ref
 C:\Users\benav\IdeaProjects\CommunityPlayer\Cliente\obj\Debug\net8.0-windows\Cliente.pdb
 C:\Users\benav\IdeaProjects\CommunityPlayer\Cliente\obj\Debug\net8.0-windows\Cliente.genruntimeconfig.cache
 C:\Users\benav\IdeaProjects\CommunityPlayer\Cliente\obj\Debug\net8.0-windows\ref\Cliente.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Cliente\obj\Debug\net8.0-windows\Cliente.sourcelink.json
