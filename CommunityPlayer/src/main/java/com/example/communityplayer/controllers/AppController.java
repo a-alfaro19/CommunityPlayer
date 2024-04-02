@@ -26,6 +26,10 @@ public class AppController implements Initializable {
     public HBox sectionBox;
     @FXML
     private SongInfoController songInfoController;
+
+    @FXML
+    private ArtistInfoController artistInfoController;
+
     @FXML
     public Button communityPlaylist;
     @FXML
@@ -40,8 +44,6 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Sections
-        loadSongInfoSection();
 
         // Load Config File
         loadConfigFile();
@@ -49,6 +51,12 @@ public class AppController implements Initializable {
         // Create song list
         loadSongLibrary();
         iterator = songList.createIterator();
+
+        // Sections
+        loadArtistInfoSection();
+        loadSongInfoSection();
+
+
 
         // Create Server
         createServer();
@@ -66,7 +74,7 @@ public class AppController implements Initializable {
     }
 
     private void loadConfigFile() {
-        String configFilePath = "C:/Users/andre/OneDrive/Documents/GitHub/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
+        String configFilePath = "C:/Users/snipe/OneDrive/Desktop/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
 
         try {
             Ini iniConfig = new Ini(new File(configFilePath)); // Load the INI file
@@ -86,6 +94,21 @@ public class AppController implements Initializable {
         songList = extractor.getSongList();
     }
 
+    private void loadArtistInfoSection() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("artistInfoSection.fxml"));
+            Parent artistInfosection = loader.load();
+            artistInfoController = loader.getController();
+            // Pasar la songList al controlador ArtistInfoController
+            artistInfoController.setSongList(songList);
+
+            sectionBox.getChildren().add(artistInfosection);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void loadSongInfoSection() {
 
         try {
@@ -99,6 +122,8 @@ public class AppController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
     private void createServer() {
         try {
