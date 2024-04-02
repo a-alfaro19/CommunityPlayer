@@ -10,6 +10,7 @@
 /* SONG INFO SECTION */
 .song-info-pane {
     -fx-pref-width: 337,5px;
+    -fx-max-height: 670px;
     -fx-background-radius: 5;
     -fx-background-color: #121111;
     -fx-padding: 25px 20px;
@@ -83,4 +84,62 @@
 
 .reference-button:hover {
     -fx-border-color: white;
+}
+
+.artist-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-background-radius: 20; /* Ajusta este valor para cambiar el redondeo */
+    -fx-border-radius: 20; /* Ajusta este valor para cambiar el redondeo del borde */
+}
+
+.artist-button:hover {
+    -fx-background-color: rgba(128, 128, 128, 0.5); /* Gris transparente */
+}
+
+.song-info2-pane {
+    -fx-pref-width: 980px;
+    -fx-max-height: 670px;
+    -fx-background-radius: 5;
+    -fx-background-color: #121111;
+    -fx-padding: 25px 20px;
+    -fx-spacing: 20px;
+}
+
+.artist-spacing {
+    -fx-spacing: 10px;
+}
+
+.tab-pane > .tab-header-area {
+    visibility: hidden;
+}
+
+/* Estilo para todos los ListViews */
+.list-view {
+    -fx-background-color: #121111; /* Color de fondo del ListView */
+}
+
+/* Estilo para los elementos de todos los ListViews */
+.list-view .list-cell {
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-size: 26px; /* Tamaño de la fuente */
+    -fx-padding: 5px; /* Espacio interno */
+}
+
+/* Estilo para los elementos al pasar el mouse */
+.list-view .list-cell:hover {
+    -fx-background-color: rgba(128, 128, 128, 0.3); /* Color de fondo al pasar el mouse */
+}
+
+/* Estilo para los elementos seleccionados de todos los ListViews */
+.list-view .list-cell:selected {
+    -fx-background-color: rgba(128, 128, 128, 0.7); /* Color de fondo seleccionado */
+    -fx-text-fill: white; /* Color del texto seleccionado */
+}
+
+/* Estilo para el borde redondeado del elemento seleccionado */
+.list-view .list-cell:selected .list-cell-background {
+    -fx-background-radius: 10px; /* Radio de borde redondeado */
 }
