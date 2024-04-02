@@ -184,13 +184,12 @@ namespace Cliente
             contDislike.Text = (int.Parse(contDislike.Text) + 1).ToString();
         }
 
-
         private void updateCounts()
         {
             for (int i = 0; i < likesCount.Length; i++)
             {
-                Control[] likeLabels = scrollPane.Controls.Find("contLike" + i, true); // Buscar en el panel de desplazamiento
-                Control[] dislikeLabels = scrollPane.Controls.Find("contDislike" + i, true); // Buscar en el panel de desplazamiento
+                Control[] likeLabels = scrollPane.Controls.Find("contLike" + i, true); 
+                Control[] dislikeLabels = scrollPane.Controls.Find("contDislike" + i, true); 
                 
                 foreach (Label likeLabel in likeLabels)
                 {
