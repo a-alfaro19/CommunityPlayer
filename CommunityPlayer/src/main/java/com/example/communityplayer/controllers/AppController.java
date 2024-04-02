@@ -30,6 +30,10 @@ public class AppController implements Initializable {
     public VBox sectionSecundaryBox;
     @FXML
     private SongInfoController songInfoController;
+
+    @FXML
+    private ArtistInfoController artistInfoController;
+
     @FXML
     private BarController barController;
     @FXML
@@ -46,7 +50,6 @@ public class AppController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Sections
-        loadSongInfoSection();
         loadBarSection();
 
         // Load Config File
@@ -55,6 +58,12 @@ public class AppController implements Initializable {
         // Create song list
         loadSongLibrary();
         iterator = songList.createIterator();
+
+        // Sections
+        loadArtistInfoSection();
+        loadSongInfoSection();
+
+
 
         // Create Server
         createServer();
@@ -84,6 +93,7 @@ public class AppController implements Initializable {
     private void loadConfigFile() {
         String configFilePath = "C:/Users/Brene/OneDrive/Escritorio/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
 
+
         try {
             Ini iniConfig = new Ini(new File(configFilePath)); // Load the INI file
             Preferences prefs = new IniPreferences(iniConfig); // Create preferences from the INI file
@@ -100,6 +110,21 @@ public class AppController implements Initializable {
     private void loadSongLibrary() {
         MP3MetadataExtractor extractor = new MP3MetadataExtractor(songLibraryPath);
         songList = extractor.getSongList();
+    }
+
+    private void loadArtistInfoSection() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("artistInfoSection.fxml"));
+            Parent artistInfosection = loader.load();
+            artistInfoController = loader.getController();
+            // Pasar la songList al controlador ArtistInfoController
+            artistInfoController.setSongList(songList);
+
+            sectionBox.getChildren().add(artistInfosection);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadSongInfoSection() {
@@ -125,6 +150,8 @@ public class AppController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
     private void createServer() {
         try {
