@@ -114,6 +114,8 @@ public class AppController implements Initializable {
     private void startServer() {
         server.start();
         server.receiveRequest(songInfoController);
+        server.sendResponse();
+
     }
 
 }

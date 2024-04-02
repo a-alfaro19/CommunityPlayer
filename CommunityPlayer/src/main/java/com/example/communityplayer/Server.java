@@ -12,13 +12,15 @@ import com.example.communityplayer.json.JsonRequest;
 import com.example.communityplayer.json.JsonRequestTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javafx.application.Platform;
 
 public class Server {
     private final SongPlaylist playlist;
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+    private String response = "";
 
     public Server(ServerSocket serverSocket, SongPlaylist playlist) {
         this.playlist = playlist;
@@ -34,6 +36,7 @@ public class Server {
             bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
         } catch (Exception e) {
+            System.out.println("Error corriendo el servidor.");
             e.printStackTrace();
             close(socket, bufferedReader, bufferedWriter);
         }
@@ -56,13 +59,14 @@ public class Server {
         }
     }
 
-    public void sendResponse(String response) {
+    public void sendResponse() {
         try {
             bufferedWriter.write(response);
             bufferedWriter.newLine();
             bufferedWriter.flush();
 
         } catch (Exception e) {
+            System.out.println("Error enviando respuesta.");
             e.printStackTrace();
             close(socket, bufferedReader, bufferedWriter);
         }
@@ -78,6 +82,7 @@ public class Server {
                         processRequest(request, songInfoController);
 
                     } catch (Exception e) {
+                        System.out.println("Error recibiendo mensaje");
                         e.printStackTrace();
                         close(socket, bufferedReader, bufferedWriter);
                         break;
@@ -88,8 +93,6 @@ public class Server {
     }
 
     private void processRequest(String request, SongInfoController songInfoController) {
-        String response = "";
-
         JsonRequest jsonRequest = parseJSON(request);
 
         String command = jsonRequest.command;
@@ -107,12 +110,16 @@ public class Server {
         switch (command) {
             case "Get-Playlist":
                 System.out.println("Getting Playlist");
+                response = playlist.toString();
                 break;
 
             case "Vote-up":
                 if (songId != null) {
                     song.voteUp();
-                    songInfoController.totalUpVotes.setText(String.valueOf(song.getTotalUpVotes()));
+                    Platform.runLater(() -> {
+                        songInfoController.totalUpVotes.setText(String.valueOf(song.getTotalUpVotes()));
+                    });
+
                     System.out.println("Voted Up: " + song.getTotalUpVotes());
                     response = "OK";
                 }
@@ -121,7 +128,9 @@ public class Server {
             case "Vote-down":
                 if (songId != null) {
                     song.voteDown();
-                    songInfoController.totalDownVotes.setText(String.valueOf(song.getTotalDownVotes()));
+                    Platform.runLater(() -> {
+                        songInfoController.totalDownVotes.setText(String.valueOf(song.getTotalDownVotes()));
+                    });
                     System.out.println("Voted Down: " + song.getTotalDownVotes());
                     response = "OK";
                 }
@@ -134,8 +143,6 @@ public class Server {
 
         }
 
-        sendResponse(response);
-
     }
 
     private JsonRequest parseJSON(String json) {
@@ -145,3 +152,4 @@ public class Server {
 
 }
 
+//TODO: Coordinar mutex del server
