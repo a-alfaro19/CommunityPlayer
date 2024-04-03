@@ -38,6 +38,8 @@ public class App extends Application {
         stage.setTitle("Community Player");
         Image icon = new Image(Objects.requireNonNull(getClass().getResource("images/app-logo.png")).toExternalForm());
         stage.getIcons().add(icon);
+        stage.setResizable(true); // Permitir que la ventana sea redimensionable
+        stage.setMaximized(true);
 
         stage.show();
 
