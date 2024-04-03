@@ -56,7 +56,7 @@ public class BarController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ImageView playImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/pause.png"))));
+        ImageView playImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/pause1.png"))));
         playImageView.setFitWidth(38);
         playImageView.setFitHeight(38);
         playButtomIcon.setGraphic(playImageView);
@@ -134,7 +134,7 @@ public class BarController implements Initializable{
         mediaPlayer.setOnReady(() -> {
             mediaPlayer.seek(currentTime);
             mediaPlayer.play();
-            setPauseButtonImage("images/pause.png");
+            setPauseButtonImage("images/pause1.png");
             addMediaPlayerChangeListener();
             TimeLabelUpdater();
             mediaPlayer.setVolume(currentVolume);
@@ -147,7 +147,7 @@ public class BarController implements Initializable{
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             currentTime = mediaPlayer.getCurrentTime();
             mediaPlayer.pause();
-            setPlayButtonImage("images/play.png");
+            setPlayButtonImage("images/play1.png");
         }
     }
     private void togglePlayPause() {

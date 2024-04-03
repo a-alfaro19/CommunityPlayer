@@ -49,8 +49,6 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Sections
-        loadBarSection();
 
         // Load Config File
         loadConfigFile();
@@ -62,9 +60,10 @@ public class AppController implements Initializable {
         // Sections
         loadArtistInfoSection();
         loadSongInfoSection();
+        loadBarSection();
 
-
-
+        artistInfoController.setBarController(barController);
+        artistInfoController.setSongInfoController(songInfoController);
         // Create Server
         createServer();
 
@@ -90,7 +89,6 @@ public class AppController implements Initializable {
 
     private void loadConfigFile() {
         String configFilePath = "C:/Users/Brene/OneDrive/Escritorio/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
-
 
         try {
             Ini iniConfig = new Ini(new File(configFilePath)); // Load the INI file
