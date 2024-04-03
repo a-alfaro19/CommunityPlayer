@@ -5,10 +5,8 @@ import com.example.communityplayer.SongPlaylist;
 import com.example.communityplayer.ds.CustomList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,12 +23,33 @@ public class ArtistInfoController implements Initializable {
 
     private SongPlaylist songList;
 
+    private BarController barController;
+    private SongInfoController songInfoController;
+
     // Método para establecer la instancia de SongPlaylist
     public void setSongList(SongPlaylist songList) {
         this.songList = songList;
     }
+
+    public void setBarController(BarController barController) {
+        this.barController = barController;
+    }
+
+    public void setSongInfoController(SongInfoController songInfoController) {
+        this.songInfoController = songInfoController;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Agregar evento de doble clic a todas las listas de canciones
+        setDoubleClickEvent(artistSongList);
+        setDoubleClickEvent(artistSongList1);
+        setDoubleClickEvent(artistSongList2);
+        setDoubleClickEvent(artistSongList3);
+        setDoubleClickEvent(artistSongList31);
+        setDoubleClickEvent(artistSongList32);
+        setDoubleClickEvent(artistSongList33);
+
         // Asignar acciones a los botones
         badBunnyButton.setOnAction(event -> loadArtistSongs("Bad Bunny", artistSongList));
         edSheeranButton.setOnAction(event -> loadArtistSongs("Ed Sheeran", artistSongList1));
@@ -41,15 +60,27 @@ public class ArtistInfoController implements Initializable {
         theWeekndButton.setOnAction(event -> loadArtistSongs("The Weeknd", artistSongList3));
     }
 
+    // Método para establecer el evento de doble clic en una ListView
+    private void setDoubleClickEvent(ListView<String> listView) {
+        listView.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+                String selectedSong = listView.getSelectionModel().getSelectedItem();
+                if (selectedSong != null) {
+                    playSelectedSong(selectedSong);
+                }
+            }
+        });
+    }
+
     private void loadArtistSongs(String artistName, ListView<String> listView) {
         if (songList != null) {
             CustomList<Song> songs = songList.getSongsByArtist(artistName);
-            System.out.println("Número de canciones para " + artistName + ": " + songs.size()); // Añadir esta línea para verificar el tamaño de la lista de canciones
+            System.out.println("Número de canciones para " + artistName + ": " + songs.size());
             listView.getItems().clear();
             for (int i = 0; i < songs.size(); i++) {
                 Song song = songs.get(i);
                 String songName = song.getSongName();
-                System.out.println("Nombre de la canción: " + songName); // Añadir esta línea para verificar el nombre de la canción
+                System.out.println("Nombre de la canción: " + songName);
                 listView.getItems().add(songName);
             }
             selectTab(artistName);
@@ -64,6 +95,20 @@ public class ArtistInfoController implements Initializable {
                 tabPane.getSelectionModel().select(tab);
                 break;
             }
+        }
+    }
+
+    private void playSelectedSong(String songName) {
+        if (songList != null && barController != null) {
+            Song selectedSong = songList.getSongByName(songName);
+            if (selectedSong != null) {
+                barController.updateView(selectedSong);
+                songInfoController.updateView(selectedSong);
+            } else {
+                new Alert(Alert.AlertType.ERROR, "No se encontró la canción seleccionada.", ButtonType.OK).showAndWait();
+            }
+        } else {
+            new Alert(Alert.AlertType.ERROR, "No se pueden reproducir canciones.", ButtonType.OK).showAndWait();
         }
     }
 }

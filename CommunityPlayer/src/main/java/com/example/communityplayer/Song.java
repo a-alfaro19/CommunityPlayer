@@ -2,6 +2,8 @@ package com.example.communityplayer;
 
 import org.jaudiotagger.tag.datatype.Artwork;
 
+import java.time.Duration;
+
 /**
  * A class representing a song.
  */

@@ -63,8 +63,8 @@ public class AppController implements Initializable {
         loadArtistInfoSection();
         loadSongInfoSection();
 
-
-
+        artistInfoController.setBarController(barController);
+        artistInfoController.setSongInfoController(songInfoController);
         // Create Server
         createServer();
 
@@ -89,7 +89,7 @@ public class AppController implements Initializable {
     }
 
     private void loadConfigFile() {
-        String configFilePath = "C:/Users/Brene/OneDrive/Escritorio/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
+        String configFilePath = "C:/Users/snipe/OneDrive/Desktop/CommunityPlaylist/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
 
 
         try {
