@@ -49,8 +49,6 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Sections
-        loadBarSection();
 
         // Load Config File
         loadConfigFile();
@@ -62,6 +60,7 @@ public class AppController implements Initializable {
         // Sections
         loadArtistInfoSection();
         loadSongInfoSection();
+        loadBarSection();
 
         artistInfoController.setBarController(barController);
         artistInfoController.setSongInfoController(songInfoController);
