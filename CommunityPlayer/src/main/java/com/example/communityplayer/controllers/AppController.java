@@ -68,8 +68,6 @@ public class AppController implements Initializable {
         // Create Server
         createServer();
 
-        communityPlaylist.setOnAction(event -> startServer());
-        next.setOnAction(event -> nextSong(iterator));
         barController.nextButtomIcon.setOnAction(event -> nextSong(iterator));
         barController.previousButtomIcon.setOnAction(event -> previousSong(iterator));
     }

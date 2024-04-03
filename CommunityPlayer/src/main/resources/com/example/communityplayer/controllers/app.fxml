@@ -8,10 +8,6 @@
       xmlns:fx="http://javafx.com/fxml">
 
     <HBox fx:id="sectionBox" styleClass="root">
-        <VBox>
-            <Button fx:id="communityPlaylist">Community Playlist</Button>
-            <Button fx:id="next">Next Song</Button>
-        </VBox>
 
     </HBox>
 

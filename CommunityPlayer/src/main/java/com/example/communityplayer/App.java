@@ -42,7 +42,6 @@ public class App extends Application {
         stage.show();
 
     }
-
     /**
      * Loads a font from the specified font path with the given font size.
      *

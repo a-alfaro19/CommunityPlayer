@@ -56,9 +56,9 @@ public class BarController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ImageView playImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/PlayB.png"))));
-        playImageView.setFitWidth(35);
-        playImageView.setFitHeight(35);
+        ImageView playImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/pause.png"))));
+        playImageView.setFitWidth(38);
+        playImageView.setFitHeight(38);
         playButtomIcon.setGraphic(playImageView);
         playButtomIcon.setOnAction(event -> togglePlayPause());
 
@@ -134,7 +134,7 @@ public class BarController implements Initializable{
         mediaPlayer.setOnReady(() -> {
             mediaPlayer.seek(currentTime);
             mediaPlayer.play();
-            setPauseButtonImage("images/PlayB.png");
+            setPauseButtonImage("images/pause.png");
             addMediaPlayerChangeListener();
             TimeLabelUpdater();
             mediaPlayer.setVolume(currentVolume);
@@ -147,7 +147,7 @@ public class BarController implements Initializable{
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             currentTime = mediaPlayer.getCurrentTime();
             mediaPlayer.pause();
-            setPlayButtonImage("images/PauseB.png");
+            setPlayButtonImage("images/play.png");
         }
     }
     private void togglePlayPause() {
@@ -161,14 +161,14 @@ public class BarController implements Initializable{
     }
     private void setPlayButtonImage(String imagePath) {
         ImageView playImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath))));
-        playImageView.setFitWidth(35);
-        playImageView.setFitHeight(35);
+        playImageView.setFitWidth(38);
+        playImageView.setFitHeight(38);
         playButtomIcon.setGraphic(playImageView);
     }
     private void setPauseButtonImage(String imagePath) {
         ImageView pauseImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath))));
-        pauseImageView.setFitWidth(35);
-        pauseImageView.setFitHeight(35);
+        pauseImageView.setFitWidth(38);
+        pauseImageView.setFitHeight(38);
         playButtomIcon.setGraphic(pauseImageView);
     }
     private void addMediaPlayerChangeListener() {

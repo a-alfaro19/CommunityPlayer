@@ -4,6 +4,7 @@
     -fx-pref-width: 1350px;
     -fx-pref-height: 660px;
     -fx-padding: 10px;
+    -fx-spacing: 5px;
 }
 
 .rootSecundary{
@@ -19,7 +20,7 @@
     -fx-background-radius: 5;
     -fx-background-color: #121111;
     -fx-padding: 23px 18px;
-    -fx-spacing: 20px;
+    -fx-spacing: 18px;
 }
 .song-info-title-label {
     -fx-font-family: "Gotham";
@@ -160,11 +161,12 @@
 
 .song-info2-pane {
     -fx-pref-width: 980px;
-    -fx-max-height: 670px;
     -fx-background-radius: 5;
     -fx-background-color: #121111;
-    -fx-padding: 25px 20px;
-    -fx-spacing: 20px;
+    -fx-padding: 0px 20px;
+}
+.song-table-pane{
+    -fx-spacing: 10px;
 }
 
 .artist-spacing {
