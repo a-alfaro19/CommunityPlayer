@@ -1,55 +1,32 @@
 package com.example.communityplayer;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.UUID;
-
-import com.example.communityplayer.Song;
-import com.example.communityplayer.SongPlaylist;
-import com.example.communityplayer.controllers.SongInfoController;
-import com.example.communityplayer.json.JsonRequest;
-import com.example.communityplayer.json.JsonRequestTypeAdapter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import javafx.application.Platform;
 
 public class Server {
-    private final SongPlaylist playlist;
     private final ServerSocket serverSocket;
     private Socket socket;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
-    private String response = "";
 
-    public Server(ServerSocket serverSocket, SongPlaylist playlist) {
-        this.playlist = playlist;
+    public Server(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
 
-    public void start() {
+    public void listen() {
         try {
-            System.out.println("Server started");
             socket = serverSocket.accept();
-            System.out.println("Client accepted");
-            bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            System.out.println("Client connected: " + socket.getInetAddress());
 
         } catch (Exception e) {
             System.out.println("Error corriendo el servidor.");
             e.printStackTrace();
-            close(socket, bufferedReader, bufferedWriter);
+            close();
         }
     }
 
-    public void close(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+    public void close() {
         try {
-            if (bufferedReader != null) {
-                bufferedReader.close();
-            }
-            if (bufferedWriter != null) {
-                bufferedWriter.close();
-            }
             if (socket != null) {
                 socket.close();
             }
@@ -59,95 +36,50 @@ public class Server {
         }
     }
 
-    public void sendResponse() {
+    public void sendResponse(String response) {
         try {
-            bufferedWriter.write(response);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
+            OutputStream outputStream = socket.getOutputStream();
+
+            byte[] bytesToSend = response.getBytes();
+            int toSendLen = bytesToSend.length;
+            byte[] toSendLenBytes = new byte[4];
+            toSendLenBytes[0] = (byte) (toSendLen & 0xff);
+            toSendLenBytes[1] = (byte) ((toSendLen >> 8) & 0xff);
+            toSendLenBytes[2] = (byte) ((toSendLen >> 16) & 0xff);
+            toSendLenBytes[3] = (byte) ((toSendLen >> 24) & 0xff);
+
+            outputStream.write(toSendLenBytes);
+            outputStream.write(bytesToSend);
 
         } catch (Exception e) {
             System.out.println("Error enviando respuesta.");
             e.printStackTrace();
-            close(socket, bufferedReader, bufferedWriter);
+            close();
         }
     }
 
-    public void receiveRequest(SongInfoController songInfoController) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (socket.isConnected()) {
-                    try {
-                        String request = bufferedReader.readLine();
-                        processRequest(request, songInfoController);
+    public String receiveRequest() {
+        String received = "";
+        try {
+            InputStream inputStream = socket.getInputStream();
 
-                    } catch (Exception e) {
-                        System.out.println("Error recibiendo mensaje");
-                        e.printStackTrace();
-                        close(socket, bufferedReader, bufferedWriter);
-                        break;
-                    }
-                }
-            }
-        }).start();
-    }
+            byte[] lenBytes = new byte[4];
+            inputStream.read(lenBytes, 0, 4);
+            int len = (((lenBytes[3] & 0xff) << 24) | ((lenBytes[2] & 0xff) << 16) |
+                    ((lenBytes[1] & 0xff) << 8) | (lenBytes[0] & 0xff));
+            byte[] receivedBytes = new byte[len];
+            inputStream.read(receivedBytes, 0, len);
+            received = new String(receivedBytes, 0, len);
+            System.out.println("Server received: " + received);
 
-    private void processRequest(String request, SongInfoController songInfoController) {
-        JsonRequest jsonRequest = parseJSON(request);
+            return received;
 
-        String command = jsonRequest.command;
-        System.out.println(command);
-        String songId = jsonRequest.songId;
-
-        Song song;
-        if (songId != null) {
-            song = playlist.getById(UUID.fromString(songId));
-
-        } else {
-            song = null;
+        } catch (Exception e) {
+            System.err.println("Error en la conexion: " + e.getMessage());
+//            e.printStackTrace();
+            close();
+            return received;
         }
-
-        switch (command) {
-            case "Get-Playlist":
-                System.out.println("Getting Playlist");
-                response = playlist.toString();
-                break;
-
-            case "Vote-up":
-                if (songId != null) {
-                    song.voteUp();
-                    Platform.runLater(() -> {
-                        songInfoController.totalUpVotes.setText(String.valueOf(song.getTotalUpVotes()));
-                    });
-
-                    System.out.println("Voted Up: " + song.getTotalUpVotes());
-                    response = "OK";
-                }
-                break;
-
-            case "Vote-down":
-                if (songId != null) {
-                    song.voteDown();
-                    Platform.runLater(() -> {
-                        songInfoController.totalDownVotes.setText(String.valueOf(song.getTotalDownVotes()));
-                    });
-                    System.out.println("Voted Down: " + song.getTotalDownVotes());
-                    response = "OK";
-                }
-                break;
-
-            default:
-                System.out.println("Comando desconocido: " + command);
-                response = "ERROR";
-                break;
-
-        }
-
-    }
-
-    private JsonRequest parseJSON(String json) {
-        Gson gson = new GsonBuilder().registerTypeAdapter(JsonRequest.class, new JsonRequestTypeAdapter()).create();
-        return gson.fromJson(json, JsonRequest.class);
     }
 
 }

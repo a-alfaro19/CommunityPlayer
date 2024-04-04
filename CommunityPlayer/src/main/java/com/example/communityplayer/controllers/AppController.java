@@ -3,6 +3,11 @@ package com.example.communityplayer.controllers;
 import com.example.communityplayer.*;
 import com.example.communityplayer.ds.iterator.Iterator;
 import com.example.communityplayer.Server;
+import com.example.communityplayer.json.JsonRequest;
+import com.example.communityplayer.json.JsonRequestTypeAdapter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +22,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.prefs.Preferences;
 
 public class AppController implements Initializable {
@@ -33,6 +41,7 @@ public class AppController implements Initializable {
 
     private SongPlaylist songList;
     private Iterator<Song> iterator; // temp
+    private SongPlaylist playlist;
     private int serverPort;
     private Server server;
     private String songLibraryPath;
@@ -50,9 +59,6 @@ public class AppController implements Initializable {
         loadSongLibrary();
         iterator = songList.createIterator();
 
-        // Create Server
-        createServer();
-
         communityPlaylist.setOnAction(event -> startServer());
         next.setOnAction(event -> nextSong(iterator));
 
@@ -66,7 +72,7 @@ public class AppController implements Initializable {
     }
 
     private void loadConfigFile() {
-        String configFilePath = "C:/Users/andre/OneDrive/Documents/GitHub/CommunityPlayer/CommunityPlayer/src/main/resources/com/example/communityplayer/config.ini";
+        String configFilePath = "src/main/java/com/example/communityplayer/config.ini";
 
         try {
             Ini iniConfig = new Ini(new File(configFilePath)); // Load the INI file
@@ -100,22 +106,96 @@ public class AppController implements Initializable {
         }
     }
 
-    private void createServer() {
-        try {
-            server = new Server(new ServerSocket(serverPort), songList);
+    private void createPlaylist() {
+        playlist = new SongPlaylist();
+        Iterator<Song> iterator = songList.createIterator();
 
-        } catch (Exception e) {
-            System.out.println("Error creando servidor!");
-            e.printStackTrace();
+        while (playlist.getSize() != 10) {
+            playlist.insert(iterator.next().data);
         }
 
     }
 
     private void startServer() {
-        server.start();
-        server.receiveRequest(songInfoController);
-        server.sendResponse();
+        createPlaylist();
 
+        try {
+            server = new Server(new ServerSocket(serverPort));
+
+            while (true) {
+                server.listen();
+                String request = server.receiveRequest();
+                String response = processRequest(request);
+                server.sendResponse(response);
+                server.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private String processRequest(String request) {
+        JsonRequest jsonRequest = parseJSON(request);
+
+        String command = jsonRequest.command;
+        System.out.println(command);
+        String songId = jsonRequest.songId;
+
+        Song song;
+        if (songId != null) {
+            song = playlist.getById(UUID.fromString(songId));
+
+        } else {
+            song = null;
+        }
+
+        String response = "";
+        switch (command) {
+            case "Get-Playlist":
+                System.out.println("Getting Playlist");
+                response = playlist.toString();
+                break;
+
+            case "Vote-up":
+                if (songId != null) {
+                    song.voteUp();
+                    Platform.runLater(() -> {
+                        songInfoController.totalUpVotes.setText(String.valueOf(song.getTotalUpVotes()));
+                    });
+
+                    System.out.println("Voted Up: " + song.getTotalUpVotes());
+                    response = "OK";
+                }
+                break;
+
+            case "Vote-down":
+                if (songId != null) {
+                    song.voteDown();
+                    Platform.runLater(() -> {
+                        songInfoController.totalDownVotes.setText(String.valueOf(song.getTotalDownVotes()));
+                    });
+                    System.out.println("Voted Down: " + song.getTotalDownVotes());
+                    response = "OK";
+                }
+                break;
+
+            default:
+                System.out.println("Comando desconocido: " + command);
+                response = "ERROR";
+                break;
+
+        }
+
+        return response;
+
+    }
+
+    private JsonRequest parseJSON(String json) {
+        Gson gson = new GsonBuilder().registerTypeAdapter(JsonRequest.class, new JsonRequestTypeAdapter()).create();
+        return gson.fromJson(json, JsonRequest.class);
     }
 
 }
