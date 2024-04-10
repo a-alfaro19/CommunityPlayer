@@ -72,7 +72,7 @@ public class AppController implements Initializable {
     }
 
     private void nextSong(Iterator<Song> iterator) {
-        Song currentSong = iterator.next().data;
+        Song currentSong = iterator.next().next.data;
         System.out.println(currentSong.getId());
 
         songInfoController.updateView(currentSong);
@@ -80,7 +80,7 @@ public class AppController implements Initializable {
     }
 
     private void previousSong(Iterator<Song> iterator){
-        Song currentSong = iterator.prev().data;
+        Song currentSong = iterator.prev().prev.data;
         System.out.println(currentSong.getId());
 
         songInfoController.updateView(currentSong);
