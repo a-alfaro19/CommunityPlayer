@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andre\\OneDrive\\Documents\\GitHub\\CommunityPlayer\\Client\\Client.csproj": {}
+    "C:\\Users\\benav\\IdeaProjects\\CommunityPlayer\\Client\\Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andre\\OneDrive\\Documents\\GitHub\\CommunityPlayer\\Client\\Client.csproj": {
+    "C:\\Users\\benav\\IdeaProjects\\CommunityPlayer\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andre\\OneDrive\\Documents\\GitHub\\CommunityPlayer\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\benav\\IdeaProjects\\CommunityPlayer\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\andre\\OneDrive\\Documents\\GitHub\\CommunityPlayer\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andre\\OneDrive\\Documents\\GitHub\\CommunityPlayer\\Client\\obj\\",
+        "projectPath": "C:\\Users\\benav\\IdeaProjects\\CommunityPlayer\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\benav\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\benav\\IdeaProjects\\CommunityPlayer\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\benav\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
