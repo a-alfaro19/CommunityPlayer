@@ -66,6 +66,10 @@ public class DoubleLinkedList<T> implements Aggregate<T> {
         return head == null;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     /**
      * Inserts a new node with the given data at the end of the list.
      *

@@ -139,16 +139,11 @@ public class Song {
      */
     @Override
     public String toString() {
-        return "Song{" +
-                "id='" + id + '\'' +
-                ", songName='" + songName + '\'' +
-                ", artistName='" + artistName + '\'' +
-                ", albumName='" + albumName + '\'' +
-                ", musicGenre='" + musicGenre + '\'' +
-                ", totalUpVotes=" + totalUpVotes +
-                ", totalDownVotes=" + totalDownVotes +
-                ", filePath='" + filePath + '\'' +
-                ", artwork=" + artwork +
-                '}';
+        return "{" +
+                "\"id\": \"" + id + "\"" +
+                ", \"song\": \"" + songName + "\"" +
+                ", \"artist\": \"" + artistName + "\"" +
+                ", \"artwork\": \"" + artwork + "\"" +
+                "}";
     }
 }

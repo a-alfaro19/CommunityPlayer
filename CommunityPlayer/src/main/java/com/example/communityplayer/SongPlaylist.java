@@ -46,4 +46,16 @@ public class SongPlaylist extends DoubleLinkedList<Song> {
         }
         return null;
     }
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Iterator<Song> iterator = createIterator();
+        while (iterator.hasNext()) {
+            sb.append(iterator.next().data.toString());
+        }
+        sb.append("]");
+
+        return sb.toString();
+    }
+
 }
