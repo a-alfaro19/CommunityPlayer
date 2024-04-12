@@ -187,6 +187,9 @@ public class BarController implements Initializable{
             double mouseX = event.getX();
             double progressBarWidth = progressBarSong.getWidth();
             double newTime = (mouseX / progressBarWidth) * mediaPlayer.getTotalDuration().toMillis();
+            if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
+                mediaPlayer.play();
+                setPauseButtonImage("images/pause1.png");}
             mediaPlayer.seek(Duration.millis(newTime));
         });
     }
