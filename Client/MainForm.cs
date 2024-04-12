@@ -4,55 +4,22 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace ClientGUI
+namespace CommunityClient
 {
     public partial class MainForm : Form
     {
         private Panel scrollPane;
         private int[] likesCount;
         private int[] dislikesCount;
+        private Client client;
 
-        private int serverPort;
-        private TcpClient client;
-        private StreamWriter writer;
-
-        //private 
-
-        public MainForm(int serverPort)
+        public MainForm()
         {
-            this.serverPort = serverPort;
             InitializeComponent();
             InitializeContent();
-            
+            client = new Client();
         }
-
-        private void ConnectToServer() {
-            try {
-                client = new TcpClient("localhost", serverPort);
-                writer = new StreamWriter(client.GetStream());
-                new Thread(ReceiveMessages).Start();
-
-            } catch (Exception ex) {
-                MessageBox.Show("Error connecting to server: " + ex.Message);
-            }
-        }
-
-        private void ReceiveMessages() {
-            try {
-                var reader = new StreamReader(client.GetStream());
-                while (true)
-                {
-                    string message = reader.ReadLine();
-                    if (message != null)
-                    {
-                        //Invoke((Action)(() => textBoxReceivedMessages.AppendText(message + "\n")));
-                    }
-                }
-            } catch (Exception ex) {
-                MessageBox.Show("Error receiving messages: " + ex.Message);
-            }
-        }
-
+ 
         private void InitializeContent()
         {
             int screenWidth = 1350;
@@ -209,19 +176,45 @@ namespace ClientGUI
             scrollPane.Controls.Add(labelSong);
         }
 
-        private void UpVotes_Click(object sender, EventArgs e, Label contLike)
+        public void UpVotes_Click(object sender, EventArgs e, Label contLike)
         {
-            PictureBox upVoteButton = (PictureBox)sender;
-            contLike.Text = (int.Parse(contLike.Text) + 1).ToString();
+            try
+            {
+                PictureBox upVoteButton = (PictureBox)sender;
+                contLike.Text = (int.Parse(contLike.Text) + 1).ToString();
+
+                string variableName = upVoteButton.Name.Replace("like", "") + "likeLabel";
+                Console.WriteLine(variableName);
+
+                string message = "Se ha dado like a " + variableName + ". Cantidad de likes: " + contLike.Text;
+                client.SendMessage("Like", message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en UpVotes_Click: " + ex.Message);
+            }
         }
 
-        private void DownVotes_Click(object sender, EventArgs e, Label contDislike)
+        public void DownVotes_Click(object sender, EventArgs e, Label contDislike)
         {
-            PictureBox downVoteButton = (PictureBox)sender;
-            contDislike.Text = (int.Parse(contDislike.Text) + 1).ToString();
+            try
+            {
+                PictureBox downVoteButton = (PictureBox)sender;
+                contDislike.Text = (int.Parse(contDislike.Text) + 1).ToString();
+
+                string variableName = downVoteButton.Name.Replace("dislike", "") + "dislikeLabel";
+                Console.WriteLine(variableName);
+
+                string message = "Se ha dado dislike a " + variableName + ". Cantidad de dislikes: " + contDislike.Text;
+                client.SendMessage("Dislike", message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en DownVotes_Click: " + ex.Message);
+            }
         }
 
-        private void updateCounts()
+        public void updateCounts()
         {
             for (int i = 0; i < likesCount.Length; i++)
             {

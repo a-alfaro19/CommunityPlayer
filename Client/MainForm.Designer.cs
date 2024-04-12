@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ClientGUI
+namespace CommunityClient
 {
     public partial class MainForm : Form
     {

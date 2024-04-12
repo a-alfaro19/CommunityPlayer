@@ -36,13 +36,13 @@ namespace ClientGUI
 
             Client client = new Client();
             client.Connect(serverPort);
-            /*while (true)
+            while (true)
             {
                 client.SendMessage("Get-Playlist");
                 string response = client.ReceiveMessages();
                 Console.WriteLine(response);
                 break;
-            }*/
+            }
             client.Disconnect();
         }
         catch (Exception ex)
