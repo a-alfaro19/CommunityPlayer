@@ -16,12 +16,12 @@ namespace ClientGUI
         private TcpClient client;
         private StreamWriter writer;
 
-        private 
+        //private 
 
         public MainForm(int serverPort)
         {
             this.serverPort = serverPort;
-            // InitializeComponent();
+            InitializeComponent();
             InitializeContent();
             
         }
@@ -45,7 +45,7 @@ namespace ClientGUI
                     string message = reader.ReadLine();
                     if (message != null)
                     {
-                        Invoke((Action)(() => textBoxReceivedMessages.AppendText(message + "\n")));
+                        //Invoke((Action)(() => textBoxReceivedMessages.AppendText(message + "\n")));
                     }
                 }
             } catch (Exception ex) {
@@ -72,64 +72,64 @@ namespace ClientGUI
             Font gothamFont = new Font("Gotham", 12, FontStyle.Bold);
 
             // Line 1
-            addControllers(Path.GetFullPath(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\badbunny.jpeg"), "Bad Bunny", "BYE ME FUI", 110, 60, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\badbunny.jpeg", "Bad Bunny", "LOS PITS", 350, 60, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\badbunny.jpeg", "Bad Bunny", "MONACO", 590, 60, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\badbunny.jpeg", "Bad Bunny", "Si Veo a Tu Mamá", 830, 60, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\badbunny.jpeg", "Bad Bunny", "Solía", 1070, 60, scrollPane, gothamFont, 0);
+            addControllers("imgs/badbunny.jpeg", "Bad Bunny", "BYE ME FUI", 110, 60, scrollPane, gothamFont, 0);
+            addControllers("imgs/badbunny.jpeg", "Bad Bunny", "LOS PITS", 350, 60, scrollPane, gothamFont, 0);
+            addControllers("imgs/badbunny.jpeg", "Bad Bunny", "MONACO", 590, 60, scrollPane, gothamFont, 0);
+            addControllers("imgs/badbunny.jpeg", "Bad Bunny", "Si Veo a Tu Mamá", 830, 60, scrollPane, gothamFont, 0);
+            addControllers("imgs/badbunny.jpeg", "Bad Bunny", "Solía", 1070, 60, scrollPane, gothamFont, 0);
             // Line 2
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\badbunny.jpeg", "Bad Bunny", "TE MUDASTE", 110, 390, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\badbunny.jpeg", "Bad Bunny", "Tití Me Preguntó", 350, 390, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\ed.jpeg", "Ed Sheeran", "Bad Habits", 590, 390, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\ed.jpeg", "Ed Sheeran", "Happier", 830, 390, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\ed.jpeg", "Ed Sheeran", "Perfect", 1070, 390, scrollPane, gothamFont, 0);
+            addControllers("imgs/badbunny.jpeg", "Bad Bunny", "TE MUDASTE", 110, 390, scrollPane, gothamFont, 0);
+            addControllers("imgs/badbunny.jpeg", "Bad Bunny", "Tití Me Preguntó", 350, 390, scrollPane, gothamFont, 0);
+            addControllers("imgs/ed.jpeg", "Ed Sheeran", "Bad Habits", 590, 390, scrollPane, gothamFont, 0);
+            addControllers("imgs/ed.jpeg", "Ed Sheeran", "Happier", 830, 390, scrollPane, gothamFont, 0);
+            addControllers("imgs/ed.jpeg", "Ed Sheeran", "Perfect", 1070, 390, scrollPane, gothamFont, 0);
             //Line 3
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\ed.jpeg", "Ed Sheeran", "Photograph", 110, 720, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\ed.jpeg", "Ed Sheeran", "Shape of You", 350, 720, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\ed.jpeg", "Ed Sheeran", "Shivers", 590, 720, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\ed.jpeg", "Ed Sheeran", "Thinking Out Loud", 830, 720, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\frank.jpeg", "Frank Ocean", "Chanel", 1070, 720, scrollPane, gothamFont, 0);
+            addControllers("imgs/ed.jpeg", "Ed Sheeran", "Photograph", 110, 720, scrollPane, gothamFont, 0);
+            addControllers("imgs/ed.jpeg", "Ed Sheeran", "Shape of You", 350, 720, scrollPane, gothamFont, 0);
+            addControllers("imgs/ed.jpeg", "Ed Sheeran", "Shivers", 590, 720, scrollPane, gothamFont, 0);
+            addControllers("imgs/ed.jpeg", "Ed Sheeran", "Thinking Out Loud", 830, 720, scrollPane, gothamFont, 0);
+            addControllers("imgs/frank.jpeg", "Frank Ocean", "Chanel", 1070, 720, scrollPane, gothamFont, 0);
             //Line 4
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\frank.jpeg", "Frank Ocean", "In My Room", 110, 1050, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\frank.jpeg", "Frank Ocean", "Ivy", 350, 1050, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\frank.jpeg", "Frank Ocean", "Lost", 590, 1050, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\frank.jpeg", "Frank Ocean", "Novacane", 830, 1050, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\frank.jpeg", "Frank Ocean", "Pink + White", 1070, 1050, scrollPane, gothamFont, 0);
+            addControllers("imgs/frank.jpeg", "Frank Ocean", "In My Room", 110, 1050, scrollPane, gothamFont, 0);
+            addControllers("imgs/frank.jpeg", "Frank Ocean", "Ivy", 350, 1050, scrollPane, gothamFont, 0);
+            addControllers("imgs/frank.jpeg", "Frank Ocean", "Lost", 590, 1050, scrollPane, gothamFont, 0);
+            addControllers("imgs/frank.jpeg", "Frank Ocean", "Novacane", 830, 1050, scrollPane, gothamFont, 0);
+            addControllers("imgs/frank.jpeg", "Frank Ocean", "Pink + White", 1070, 1050, scrollPane, gothamFont, 0);
             //Line 5
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\frank.jpeg", "Frank Ocean", "White Ferrari", 110, 1380, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\abel.jpeg", "The Weeknd", "After Hours", 350, 1380, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\abel.jpeg", "The Weeknd", "Blinding Lights", 590, 1380, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\abel.jpeg", "The Weeknd", "Call Out My Name", 830, 1380, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\abel.jpeg", "The Weeknd", "Die For You", 1070, 1380, scrollPane, gothamFont, 0);
+            addControllers("imgs/frank.jpeg", "Frank Ocean", "White Ferrari", 110, 1380, scrollPane, gothamFont, 0);
+            addControllers("imgs/abel.jpeg", "The Weeknd", "After Hours", 350, 1380, scrollPane, gothamFont, 0);
+            addControllers("imgs/abel.jpeg", "The Weeknd", "Blinding Lights", 590, 1380, scrollPane, gothamFont, 0);
+            addControllers("imgs/abel.jpeg", "The Weeknd", "Call Out My Name", 830, 1380, scrollPane, gothamFont, 0);
+            addControllers("imgs/abel.jpeg", "The Weeknd", "Die For You", 1070, 1380, scrollPane, gothamFont, 0);
             //Line 6
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\abel.jpeg", "The Weeknd", "Reminder", 110, 1710, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\abel.jpeg", "The Weeknd", "The Hills", 350, 1710, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\abel.jpeg", "The Weeknd", "True Colors", 590, 1710, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\joji.jpeg", "Joji", "Feeling Like The End", 830, 1710, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\joji.jpeg", "Joji", "Glimpse of Us", 1070, 1710, scrollPane, gothamFont, 0);
+            addControllers("imgs/abel.jpeg", "The Weeknd", "Reminder", 110, 1710, scrollPane, gothamFont, 0);
+            addControllers("imgs/abel.jpeg", "The Weeknd", "The Hills", 350, 1710, scrollPane, gothamFont, 0);
+            addControllers("imgs/abel.jpeg", "The Weeknd", "True Colors", 590, 1710, scrollPane, gothamFont, 0);
+            addControllers("imgs/joji.jpeg", "Joji", "Feeling Like The End", 830, 1710, scrollPane, gothamFont, 0);
+            addControllers("imgs/joji.jpeg", "Joji", "Glimpse of Us", 1070, 1710, scrollPane, gothamFont, 0);
             //Line 7
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\joji.jpeg", "Joji", "Sanctuary", 110, 2040, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\joji.jpeg", "Joji", "SLOW DANCING IN THE DARK", 350, 2040, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\joji.jpeg", "Joji", "TEST DRIVE", 590, 2040, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\joji.jpeg", "Joji", "worldstar money", 830, 2040, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\joji.jpeg", "Joji", "YEAH RIGHT", 1070, 2040, scrollPane, gothamFont, 0);
+            addControllers("imgs/joji.jpeg", "Joji", "Sanctuary", 110, 2040, scrollPane, gothamFont, 0);
+            addControllers("imgs/joji.jpeg", "Joji", "SLOW DANCING IN THE DARK", 350, 2040, scrollPane, gothamFont, 0);
+            addControllers("imgs/joji.jpeg", "Joji", "TEST DRIVE", 590, 2040, scrollPane, gothamFont, 0);
+            addControllers("imgs/joji.jpeg", "Joji", "worldstar money", 830, 2040, scrollPane, gothamFont, 0);
+            addControllers("imgs/joji.jpeg", "Joji", "YEAH RIGHT", 1070, 2040, scrollPane, gothamFont, 0);
             //Line 8
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\traviesoscott.jpeg", "Travis Scott", "CAROUSEL", 110, 2370, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\traviesoscott.jpeg", "Travis Scott", "goosebumps", 350, 2370, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\traviesoscott.jpeg", "Travis Scott", "I KNOW", 590, 2370, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\traviesoscott.jpeg", "Travis Scott", "MY EYES", 830, 2370, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\traviesoscott.jpeg", "Travis Scott", "sweet sweet", 1070, 2370, scrollPane, gothamFont, 0);
+            addControllers("imgs/traviesoscott.jpeg", "Travis Scott", "CAROUSEL", 110, 2370, scrollPane, gothamFont, 0);
+            addControllers("imgs/traviesoscott.jpeg", "Travis Scott", "goosebumps", 350, 2370, scrollPane, gothamFont, 0);
+            addControllers("imgs/traviesoscott.jpeg", "Travis Scott", "I KNOW", 590, 2370, scrollPane, gothamFont, 0);
+            addControllers("imgs/traviesoscott.jpeg", "Travis Scott", "MY EYES", 830, 2370, scrollPane, gothamFont, 0);
+            addControllers("imgs/traviesoscott.jpeg", "Travis Scott", "sweet sweet", 1070, 2370, scrollPane, gothamFont, 0);
             //Line 9
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\traviesoscott.jpeg", "Travis Scott", "sdp interlude", 110, 2700, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\traviesoscott.jpeg", "Travis Scott", "STARGAZING", 350, 2700, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\eminem.jpeg", "Eminem", "Big Weenie", 590, 2700, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\eminem.jpeg", "Eminem", "Mockingbird", 830, 2700, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\eminem.jpeg", "Eminem", "Rap God", 1070, 2700, scrollPane, gothamFont, 0);
+            addControllers("imgs/traviesoscott.jpeg", "Travis Scott", "sdp interlude", 110, 2700, scrollPane, gothamFont, 0);
+            addControllers("imgs/traviesoscott.jpeg", "Travis Scott", "STARGAZING", 350, 2700, scrollPane, gothamFont, 0);
+            addControllers("imgs/eminem.jpeg", "Eminem", "Big Weenie", 590, 2700, scrollPane, gothamFont, 0);
+            addControllers("imgs/eminem.jpeg", "Eminem", "Mockingbird", 830, 2700, scrollPane, gothamFont, 0);
+            addControllers("imgs/eminem.jpeg", "Eminem", "Rap God", 1070, 2700, scrollPane, gothamFont, 0);
             //Line 10 
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\eminem.jpeg", "Eminem", "Survival", 110, 3030, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\eminem.jpeg", "Eminem", "The Real Slim Shady", 350, 3030, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\eminem.jpeg", "Eminem", "Lose Yourself", 590, 3030, scrollPane, gothamFont, 0);
-            addControllers(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\eminem.jpeg", "Eminem", "Without Me", 830, 3030, scrollPane, gothamFont, 0);
+            addControllers("imgs/eminem.jpeg", "Eminem", "Survival", 110, 3030, scrollPane, gothamFont, 0);
+            addControllers("imgs/eminem.jpeg", "Eminem", "The Real Slim Shady", 350, 3030, scrollPane, gothamFont, 0);
+            addControllers("imgs/eminem.jpeg", "Eminem", "Lose Yourself", 590, 3030, scrollPane, gothamFont, 0);
+            addControllers("imgs/eminem.jpeg", "Eminem", "Without Me", 830, 3030, scrollPane, gothamFont, 0);
 
             mainPanel.Controls.Add(scrollPane);
             this.Controls.Add(mainPanel);
@@ -151,7 +151,7 @@ namespace ClientGUI
             pictureBox.Location = new Point(x, y);
 
             PictureBox like = new PictureBox();
-            like.Image = Image.FromFile(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\laik.png");
+            like.Image = Image.FromFile("imgs/laik.png");
             like.SizeMode = PictureBoxSizeMode.StretchImage;
             like.Size = new Size(50, 30);
             like.Location = new Point(x, y + 250);
@@ -167,7 +167,7 @@ namespace ClientGUI
             like.Click += (sender, e) => UpVotes_Click(sender, e, contLike);
 
             PictureBox dislike = new PictureBox();
-            dislike.Image = Image.FromFile(@"C:\Users\andre\OneDrive\Documents\GitHub\CommunityPlayer\Cliente\imgs\dislaik.png");
+            dislike.Image = Image.FromFile("imgs/dislaik.png");
             dislike.SizeMode = PictureBoxSizeMode.StretchImage;
             dislike.Size = new Size(50, 30);
             dislike.Location = new Point(x + 90, y + 250);

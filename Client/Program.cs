@@ -5,7 +5,7 @@ namespace CommunityClient
     class Program {
 
         static void Main(string[] args) {
-            string serverIpAddress = "192.168.18.6"; // Change to the server's IP address
+            string serverIpAddress = "192.168.1.7"; // Change to the server's IP address
             int serverPort = 4343; // Port 4343
 
             Client client = new Client();
