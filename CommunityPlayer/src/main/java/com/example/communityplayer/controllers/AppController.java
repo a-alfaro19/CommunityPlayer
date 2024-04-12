@@ -46,8 +46,6 @@ public class AppController implements Initializable {
     private BarController barController;
     @FXML
     public Button communityPlaylist;
-    @FXML
-    public Button next;
     private SongPlaylist songList;
     private Iterator<Song> iterator; // temp
     private SongPlaylist playlist;
@@ -73,13 +71,10 @@ public class AppController implements Initializable {
 
         artistInfoController.setBarController(barController);
         artistInfoController.setSongInfoController(songInfoController);
-        // Create Server
-        createServer();
 
         barController.nextButtomIcon.setOnAction(event -> nextSong(iterator));
         barController.previousButtomIcon.setOnAction(event -> previousSong(iterator));
         communityPlaylist.setOnAction(event -> startServer());
-        next.setOnAction(event -> nextSong(iterator));
 
     }
 

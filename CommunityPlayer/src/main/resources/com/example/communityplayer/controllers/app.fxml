@@ -7,6 +7,7 @@
       prefWidth="1350" prefHeight="800"
       xmlns:fx="http://javafx.com/fxml">
 
+    <Button fx:id="communityPlaylist">Community Playlist</Button>
     <HBox fx:id="sectionBox" styleClass="root">
 
     </HBox>
