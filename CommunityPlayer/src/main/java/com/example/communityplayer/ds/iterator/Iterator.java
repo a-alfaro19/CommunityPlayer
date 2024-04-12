@@ -21,4 +21,5 @@ public interface Iterator<T> {
      * @return the next element in the iteration
      */
     DoubleNode<T> next();
+    DoubleNode<T> prev();
 }

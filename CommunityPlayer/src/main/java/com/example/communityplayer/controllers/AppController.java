@@ -15,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
 
@@ -29,16 +31,23 @@ import java.util.UUID;
 import java.util.prefs.Preferences;
 
 public class AppController implements Initializable {
-    public AnchorPane main;
+    public VBox main;
     @FXML
     public HBox sectionBox;
     @FXML
+    public VBox sectionSecundaryBox;
+    @FXML
     private SongInfoController songInfoController;
+
+    @FXML
+    private ArtistInfoController artistInfoController;
+
+    @FXML
+    private BarController barController;
     @FXML
     public Button communityPlaylist;
     @FXML
     public Button next;
-
     private SongPlaylist songList;
     private Iterator<Song> iterator; // temp
     private SongPlaylist playlist;
@@ -49,8 +58,6 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Sections
-        loadSongInfoSection();
 
         // Load Config File
         loadConfigFile();
@@ -59,16 +66,37 @@ public class AppController implements Initializable {
         loadSongLibrary();
         iterator = songList.createIterator();
 
+        // Sections
+        loadArtistInfoSection();
+        loadSongInfoSection();
+        loadBarSection();
+
+        artistInfoController.setBarController(barController);
+        artistInfoController.setSongInfoController(songInfoController);
+        // Create Server
+        createServer();
+
+        barController.nextButtomIcon.setOnAction(event -> nextSong(iterator));
+        barController.previousButtomIcon.setOnAction(event -> previousSong(iterator));
         communityPlaylist.setOnAction(event -> startServer());
         next.setOnAction(event -> nextSong(iterator));
 
     }
 
     private void nextSong(Iterator<Song> iterator) {
-        Song currentSong = iterator.next().data;
+        Song currentSong = iterator.next().next.data;
         System.out.println(currentSong.getId());
 
         songInfoController.updateView(currentSong);
+        barController.updateView(currentSong);
+    }
+
+    private void previousSong(Iterator<Song> iterator){
+        Song currentSong = iterator.prev().prev.data;
+        System.out.println(currentSong.getId());
+
+        songInfoController.updateView(currentSong);
+        barController.updateView(currentSong);
     }
 
     private void loadConfigFile() {
@@ -92,6 +120,21 @@ public class AppController implements Initializable {
         songList = extractor.getSongList();
     }
 
+    private void loadArtistInfoSection() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("artistInfoSection.fxml"));
+            Parent artistInfosection = loader.load();
+            artistInfoController = loader.getController();
+            // Pasar la songList al controlador ArtistInfoController
+            artistInfoController.setSongList(songList);
+
+            sectionBox.getChildren().add(artistInfosection);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void loadSongInfoSection() {
 
         try {
@@ -105,6 +148,18 @@ public class AppController implements Initializable {
             e.printStackTrace();
         }
     }
+    private void loadBarSection() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("barSection.fxml"));
+            Parent barSection = loader.load();
+            barController = loader.getController();
+            sectionSecundaryBox.getChildren().add(barSection); // Agrega al final de sectionSecundaryBox
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private void createPlaylist() {
         playlist = new SongPlaylist();
@@ -113,7 +168,6 @@ public class AppController implements Initializable {
         while (playlist.getSize() != 10) {
             playlist.insert(iterator.next().data);
         }
-
     }
 
     private void startServer() {
@@ -197,5 +251,4 @@ public class AppController implements Initializable {
         Gson gson = new GsonBuilder().registerTypeAdapter(JsonRequest.class, new JsonRequestTypeAdapter()).create();
         return gson.fromJson(json, JsonRequest.class);
     }
-
 }

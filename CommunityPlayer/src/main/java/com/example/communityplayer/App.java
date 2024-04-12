@@ -22,7 +22,6 @@ public class App extends Application {
         loadFont("fonts/GothamMedium.ttf");
         loadFont("Gotham-Font/Gotham-Black.otf");
 
-
         // Load FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("controllers/app.fxml"));
         Parent root = loader.load();
@@ -30,7 +29,7 @@ public class App extends Application {
         // Load Controller
         AppController controller = loader.getController();
 
-        Scene scene = new Scene(root, 1350, 800);
+        Scene scene = new Scene(root, 1350, 768);
 
         // Load CSS styles file
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
@@ -39,11 +38,9 @@ public class App extends Application {
         stage.setTitle("Community Player");
         Image icon = new Image(Objects.requireNonNull(getClass().getResource("images/app-logo.png")).toExternalForm());
         stage.getIcons().add(icon);
-
         stage.show();
 
     }
-
     /**
      * Loads a font from the specified font path with the given font size.
      *

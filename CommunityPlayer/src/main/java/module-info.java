@@ -6,6 +6,7 @@ module com.example.communityplayer {
     requires ini4j;
     requires java.prefs;
     requires com.google.gson;
+    requires javafx.media;
 
 
     opens com.example.communityplayer to javafx.fxml;

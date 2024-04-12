@@ -44,12 +44,16 @@ public class DoubleLinkedList<T> implements Aggregate<T> {
         }
 
         public DoubleNode<T> prev() {
-            if (!hasNext()) {
+            if (!hasPrev()) {
                 throw new NoSuchElementException();
             }
             DoubleNode<T> currentNode = current;
             current = current.prev;
             return currentNode;
+        }
+
+        public boolean hasPrev() {
+            return current != null && current.prev != null;
         }
     }
 
