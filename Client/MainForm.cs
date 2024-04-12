@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Windows.Forms;
+using Microsoft.Extensions.Logging;
 
 namespace CommunityClient
 {
@@ -12,12 +13,14 @@ namespace CommunityClient
         private int[] likesCount;
         private int[] dislikesCount;
         private Client client;
+        private readonly ILogger<MainForm> formLogger;
 
-        public MainForm()
+        public MainForm(ILogger<MainForm> formLogger, ILogger<Client> clientLogger)
         {
             InitializeComponent();
             InitializeContent();
-            client = new Client();
+            this.formLogger = formLogger;
+            client = new Client(clientLogger);
         }
  
         private void InitializeContent()
@@ -184,14 +187,14 @@ namespace CommunityClient
                 contLike.Text = (int.Parse(contLike.Text) + 1).ToString();
 
                 string variableName = upVoteButton.Name.Replace("like", "") + "likeLabel";
-                Console.WriteLine(variableName);
+                formLogger.LogInformation("Se ha dado like a {VariableName}. Cantidad de likes: {LikeCount}", variableName, contLike.Text);
 
                 string message = "Se ha dado like a " + variableName + ". Cantidad de likes: " + contLike.Text;
                 client.SendMessage("Like", message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error en UpVotes_Click: " + ex.Message);
+                formLogger.LogError(ex, "Error en UpVotes_Click: {ErrorMessage}", ex.Message);
             }
         }
 
@@ -203,14 +206,14 @@ namespace CommunityClient
                 contDislike.Text = (int.Parse(contDislike.Text) + 1).ToString();
 
                 string variableName = downVoteButton.Name.Replace("dislike", "") + "dislikeLabel";
-                Console.WriteLine(variableName);
+                formLogger.LogInformation("Se ha dado dislike a {VariableName}. Cantidad de dislikes: {DislikeCount}", variableName, contDislike.Text);
 
                 string message = "Se ha dado dislike a " + variableName + ". Cantidad de dislikes: " + contDislike.Text;
                 client.SendMessage("Dislike", message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error en DownVotes_Click: " + ex.Message);
+                formLogger.LogError(ex, "Error en DownVotes_Click: {ErrorMessage}", ex.Message);
             }
         }
 

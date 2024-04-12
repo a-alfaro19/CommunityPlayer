@@ -13,3 +13,17 @@ C:\Users\benav\IdeaProjects\CommunityPlayer\Client\obj\Debug\net8.0-windows\refi
 C:\Users\benav\IdeaProjects\CommunityPlayer\Client\obj\Debug\net8.0-windows\Client.pdb
 C:\Users\benav\IdeaProjects\CommunityPlayer\Client\obj\Debug\net8.0-windows\Client.genruntimeconfig.cache
 C:\Users\benav\IdeaProjects\CommunityPlayer\Client\obj\Debug\net8.0-windows\ref\Client.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\obj\Debug\net8.0-windows\Client.csproj.AssemblyReference.cache
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Configuration.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Console.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\benav\IdeaProjects\CommunityPlayer\Client\obj\Debug\net8.0-windows\Client.csproj.Up2Date
